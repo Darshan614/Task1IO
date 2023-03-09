@@ -1,0 +1,10 @@
+.error{
+    text-align: center;
+    padding: 2%;
+    margin-bottom: 30px;
+    color: red;
+    font-size: 0.8em;
+    border:red dashed;
+    border-radius: 5px;
+    font-style: italic;
+}

@@ -1,0 +1,57 @@
+.field{
+    display: grid;
+    width: 400px;
+    /* background-color: aquamarine; */
+    margin-top: 20px;
+    border-bottom: 2px solid grey;
+    position: relative;
+    color: grey;
+    /* margin-bottom: 35px; */
+}
+
+.textfield{
+    border: none;
+    outline: none;
+    /* align-items: baseline; */
+    height: 20px;
+    font-size: 1em;
+}
+
+.fieldbox{
+    margin-bottom: 35px;
+}
+
+.field input:focus ~label, .field input:valid ~label{
+    top: -12px;
+}
+
+.invalid{
+    color: red;
+}
+.valid{
+    color: green;
+}
+
+.error{
+    font-size: 0.7em;
+    color: red;
+    font-style: italic;
+    max-width: 400px;
+    white-space: initial;
+}
+
+.field ion-icon{
+    position: absolute;
+    right: 8px;
+}
+
+.label{
+    position: absolute;
+    font-size: 0.8em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    top: -4px;
+    transition: .3s;
+}
