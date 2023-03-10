@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 
 function Admin() {
-  const [showData, setshowData] = useState(true);
+  const [showData, setshowData] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetch("http://localhost:8080/employeeData", {
@@ -17,7 +17,7 @@ function Admin() {
       .then((data) => {
         console.log(data);
         if (data.message === "Sorry Permission denied") {
-          setshowData(false);
+          setshowData(true);
         }
       });
   }, []);
