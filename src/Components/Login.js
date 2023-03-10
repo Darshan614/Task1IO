@@ -116,6 +116,7 @@ function Login() {
         req={true}
         valid={passwordValid}
         icon="lock-closed-outline"
+        type="password"
       />
       <Button onClick={onSubmitLogin} title="Log in" />
     </>

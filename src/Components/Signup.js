@@ -149,6 +149,7 @@ function Signup(props) {
         req={true}
         valid={passwordValid}
         icon="lock-closed-outline"
+        type="password"
       />
       <TextField
         label="Confirm Password"
@@ -156,6 +157,7 @@ function Signup(props) {
         req={true}
         valid={confirmpasswordValid}
         icon="lock-closed-outline"
+        type="password"
       />
       <Button onClick={onSubmitSignup} title="Sign up" />
     </>
