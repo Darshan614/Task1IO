@@ -5,8 +5,11 @@ import Button from "./UI/Button";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validatefield from "../validator/validator";
+import { authActions } from "../store/index";
+import { useDispatch, useSelector } from "react-redux";
 
 function Login() {
+  const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [emailValid, setemailValid] = useState("");
   const [password, setpassword] = useState("");
@@ -89,6 +92,7 @@ function Login() {
         if (data.message === "Login successful") {
           localStorage.setItem("token", data.token);
           console.log(localStorage.getItem("token"));
+          dispatch(authActions.login());
           navigate("/");
         } else {
           setError(data.message);

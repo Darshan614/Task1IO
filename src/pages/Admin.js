@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Admin() {
-  const [showData, setshowData] = useState(false);
+  const [showData, setshowData] = useState(true);
+  const navigate = useNavigate();
   useEffect(() => {
     const token = localStorage.getItem("token");
     fetch("http://localhost:8080/employeeData", {
@@ -16,8 +18,12 @@ function Admin() {
       })
       .then((data) => {
         console.log(data);
+        if (data.message === "Some problem in authentication") {
+          setshowData(false);
+          navigate("/auth");
+        }
         if (data.message === "Sorry Permission denied") {
-          setshowData(true);
+          setshowData(false);
         }
       });
   }, []);
