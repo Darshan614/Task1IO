@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { authActions } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -13,6 +14,28 @@ function Navbar() {
     dispatch(authActions.logout());
     navigate("/");
   };
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    fetch("http://localhost:8080/checklogin", {
+      method: "GET",
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        if (data.message === "Some problem in authentication") {
+          dispatch(authActions.logout());
+        } else if (data.message === "Invalid token") {
+          dispatch(authActions.logout());
+        } else if (data.message === "User is logged in") {
+          dispatch(authActions.login());
+        }
+      });
+  }, [dispatch]);
   return (
     <>
       <nav className={classes.navbar}>
