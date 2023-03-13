@@ -1,8 +1,10 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Components/Loading";
 
 function Admin() {
+  const [loading, setloading] = useState(true);
   const [showData, setshowData] = useState(true);
   const navigate = useNavigate();
   useEffect(() => {
@@ -14,6 +16,7 @@ function Admin() {
       },
     })
       .then((res) => {
+        setloading(false);
         return res.json();
       })
       .then((data) => {
@@ -25,9 +28,19 @@ function Admin() {
         if (data.message === "Sorry Permission denied") {
           setshowData(false);
         }
+      })
+      .catch((err) => {
+        setloading(false);
+        setshowData(false);
+        console.log(err);
       });
   }, []);
-  return <h1>{showData ? "Employee Data" : "Permission denied"}</h1>;
+  return (
+    <>
+      {loading && <Loading />}
+      {!loading && <h1>{showData ? "Employee Data" : "Permission denied"}</h1>}
+    </>
+  );
 }
 
 export default Admin;
