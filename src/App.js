@@ -5,6 +5,7 @@ import Auth from "./pages/Auth";
 import React from "react";
 import Products from "./pages/Products";
 import Admin from "./pages/Admin";
+import AddProduct from "./pages/AddProduct";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "/auth", element: <Auth /> },
       { path: "/products", element: <Products /> },
       { path: "/admin", element: <Admin /> },
+      { path: "/admin/addproduct", element: <AddProduct /> },
     ],
   },
 ]);
