@@ -1,0 +1,16 @@
+.link{
+    text-decoration:none;
+    color: white;
+    background-color: #eeae37;
+    padding: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 20px;
+    width: 150px;
+    text-align: center;
+    
+}
+
+.link:hover{
+    background-color: rgb(255, 115, 0);
+}

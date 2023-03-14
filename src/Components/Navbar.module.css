@@ -1,39 +1,41 @@
 .navbar{
     display: flex;
     justify-content: space-between;
-    background-color: rgba(71, 96, 236, 0.411);
+    /* background-color: rgba(71, 96, 236, 0.411); */
+    background: none;
     padding: 15px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 .navlink{
     margin: 7px;
-    background-color: blue;
-    
     border-radius: 2px;
     color: white;
     text-decoration: none;
 }
-
 .logout{
     margin-right: 8px;
+    background: none;
+    color: white;
+}
+.logout:hover{
+    cursor: pointer;
+    color: yellow;
+    border: 2px solid white;
 }
 
-.active{
-    color: black;
-    background-color: rgb(255, 230, 0);
+.active,.inactive{
+    color: yellow;
     padding: 5px;
     text-decoration: none;
     padding-left: 7px;
     padding-right: 7px;
     border-radius:2px;
+    font-family: 'Kanit';
 }
 .inactive{
-    text-decoration: none;
-    padding: 5px;
-    padding-left: 7px;
-    padding-right: 7px;
-    border-radius:2px;
-    color: black;
-    background-color: rgb(247, 241, 241);
+    color: white;
+}
+.inactive:hover{
+    color: yellow;
 }

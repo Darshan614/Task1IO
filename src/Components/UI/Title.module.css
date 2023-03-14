@@ -1,6 +1,8 @@
 .title{
     text-align: center;
-    background-color: grey;
+    background: #474bff;
+background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
+background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
     padding: 5%;
     margin-bottom: 30px;
     color: white;

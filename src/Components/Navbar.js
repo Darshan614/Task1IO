@@ -3,39 +3,21 @@ import { NavLink } from "react-router-dom";
 import { authActions } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const loggedIn = useSelector((state) => state.loggedIn);
+  const roles = useSelector((state) => state.role);
   const logouthandler = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     dispatch(authActions.logout());
     navigate("/");
   };
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    fetch("http://localhost:8080/checklogin", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        console.log(data);
-        if (data.message === "Some problem in authentication") {
-          dispatch(authActions.logout());
-        } else if (data.message === "Invalid token") {
-          dispatch(authActions.logout());
-        } else if (data.message === "User is logged in") {
-          dispatch(authActions.login());
-        }
-      });
-  }, [dispatch]);
+  // const role = localStorage.getItem("role");
+  // console.log("user role is", role);
+
   return (
     <>
       <nav className={classes.navbar}>
@@ -50,16 +32,18 @@ function Navbar() {
               InfoObjects
             </NavLink>
           </span>
-          <span className={classes.navlink}>
-            <NavLink
-              to="/Admin"
-              className={({ isActive }) =>
-                isActive ? classes.active : classes.inactive
-              }
-            >
-              Admin
-            </NavLink>
-          </span>
+          {roles === "admin" && (
+            <span className={classes.navlink}>
+              <NavLink
+                to="/Admin"
+                className={({ isActive }) =>
+                  isActive ? classes.active : classes.inactive
+                }
+              >
+                Admin
+              </NavLink>
+            </span>
+          )}
           <span className={classes.navlink}>
             <NavLink
               to="/products"
@@ -86,7 +70,9 @@ function Navbar() {
           )}
           {loggedIn && (
             <span className={classes.navlink}>
-              <button onClick={logouthandler}>Logout</button>
+              <button className={classes.logout} onClick={logouthandler}>
+                Logout
+              </button>
             </span>
           )}
         </div>

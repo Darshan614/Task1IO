@@ -4,11 +4,15 @@
     border-radius: 5px;
     outline: none;
     border: none;
-    background-color: grey;
+    background: #474bff;
+background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
+background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
     margin: 5px;
-    color: white;
+    color: white
 }
 .button:hover{
     cursor: pointer;
-    background-color: rgb(104, 101, 101);
+    background: #474bff;
+background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
+background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
 }

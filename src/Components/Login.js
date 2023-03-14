@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import validatefield from "../validator/validator";
 import { authActions } from "../store/index";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 function Login() {
   const dispatch = useDispatch();
@@ -91,8 +91,9 @@ function Login() {
         console.log(data);
         if (data.message === "Login successful") {
           localStorage.setItem("token", data.token);
+          localStorage.setItem("role", data.role);
           console.log(localStorage.getItem("token"));
-          dispatch(authActions.login());
+          dispatch(authActions.login(data.role));
           navigate("/");
         } else {
           setError(data.message);

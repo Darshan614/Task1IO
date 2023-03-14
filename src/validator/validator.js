@@ -30,6 +30,11 @@ let validatefield = (constraints, value) => {
       return "Value should be lesser than " + constraints.maxValue;
     }
   }
+  if (constraints.isnum) {
+    if (isNaN(value)) {
+      return "Enter a number";
+    }
+  }
   /* eslint-disable */
 
   if (constraints.email) {
@@ -42,7 +47,7 @@ let validatefield = (constraints, value) => {
         value
       )
     ) {
-      return "Passwords mismatched";
+      return "Invalid URL";
     }
   } else if (constraints.password) {
     if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(value)) {
