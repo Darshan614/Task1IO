@@ -13,6 +13,6 @@ background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
 .button:hover{
     cursor: pointer;
     background: #474bff;
-background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
-background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
+background: -webkit-linear-gradient(308deg, #6567e7 0%, #48cbff 100%);
+background: linear-gradient(170deg, #6f71e4 0%, #3c87dd 100%);
 }

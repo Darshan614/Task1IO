@@ -88,9 +88,9 @@ function AddForm() {
     if (
       productnamevalid !== "valid" ||
       descriptionvalid !== "valid" ||
-      imageurl !== "valid" ||
+      imageurlvalid !== "valid" ||
       availablevalid !== "valid" ||
-      price !== "valid"
+      pricevalid !== "valid"
     ) {
       setError("Invalid values");
       return;

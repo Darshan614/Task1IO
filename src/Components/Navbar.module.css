@@ -25,7 +25,7 @@
 }
 
 .active,.inactive{
-    color: yellow;
+    color: rgb(238, 183, 81);
     padding: 5px;
     text-decoration: none;
     padding-left: 7px;
@@ -37,5 +37,8 @@
     color: white;
 }
 .inactive:hover{
-    color: yellow;
+    color: rgb(243, 188, 87);
+}
+.active:hover{
+    color: rgb(241, 180, 65);
 }

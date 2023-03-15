@@ -1,0 +1,47 @@
+.cardtext{
+    color: black;
+    font-size: medium;
+}
+
+.img{
+    height: 100%;
+    width: 100%;
+}
+.mycard{
+    height: 200px;
+    width: auto;
+}
+
+.card{
+    width: 84%;
+    background-color: white;
+}
+
+.title{
+    color: black;
+    width: 300px;
+}
+.btn{
+    background-color: orange;
+    font-size: medium;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid orange;
+    border-radius: 5px;
+}
+
+.addcart{
+    float: right;
+    background-color: transparent;
+    border: 1px solid orange;
+    border-radius: 5px;
+    
+    font-family: sans-serif;
+}
+
+.addcart:hover{
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}

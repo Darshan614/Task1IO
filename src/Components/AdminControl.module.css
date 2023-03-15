@@ -1,7 +1,7 @@
 .link{
     text-decoration:none;
     color: white;
-    background-color: #eeae37;
+    background-color: black;
     padding: 10px;
     padding-left: 15px;
     padding-right: 15px;
@@ -12,5 +12,7 @@
 }
 
 .link:hover{
-    background-color: rgb(255, 115, 0);
+    background-color: white;
+    text-decoration: none;
+    color: black;
 }
