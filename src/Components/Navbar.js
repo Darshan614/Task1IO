@@ -7,16 +7,14 @@ import { useNavigate } from "react-router-dom";
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const loggedIn = useSelector((state) => state.loggedIn);
-  const roles = useSelector((state) => state.role);
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
+  const roles = useSelector((state) => state.auth.role);
   const logouthandler = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     dispatch(authActions.logout());
     navigate("/");
   };
-  // const role = localStorage.getItem("role");
-  // console.log("user role is", role);
 
   return (
     <>
@@ -55,7 +53,20 @@ function Navbar() {
             </NavLink>
           </span>
         </div>
+
         <div>
+          {loggedIn && (
+            <span className={classes.navlink} style={{ "font-size": "25px" }}>
+              <NavLink
+                to="/cart"
+                className={({ isActive }) =>
+                  isActive ? classes.active : classes.inactive
+                }
+              >
+                <ion-icon name="cart-outline"></ion-icon>
+              </NavLink>
+            </span>
+          )}
           {!loggedIn && (
             <span className={classes.navlink}>
               <NavLink

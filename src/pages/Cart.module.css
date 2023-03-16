@@ -1,0 +1,12 @@
+.img{
+    height: 100%;
+    width: 100%;
+}
+.mycard{
+    height: 150px;
+    width: auto;
+}
+.card{
+    margin: auto;
+    color: black;
+}

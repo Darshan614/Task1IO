@@ -2,9 +2,11 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import RootLayout from "./pages/RootLayout";
 import Auth from "./pages/Auth";
+import Cart from "./pages/Cart";
 import React from "react";
 import Products from "./pages/Products";
 import Admin from "./pages/Admin";
+import ProductInfo from "./pages/ProductInfo";
 import AddProduct from "./pages/AddProduct";
 import { checkAuthLoader, checkRoleLoader } from "./util/auth";
 import { useEffect } from "react";
@@ -20,10 +22,15 @@ const router = createBrowserRouter([
       { path: "/auth", element: <Auth /> },
       { path: "/products", element: <Products />, loader: checkAuthLoader },
       { path: "/admin", element: <Admin />, loader: checkRoleLoader },
+      { path: "/cart", element: <Cart />, loader: checkAuthLoader },
       {
         path: "/admin/addproduct",
         element: <AddProduct />,
         loader: checkRoleLoader,
+      },
+      {
+        path: "/products/:productId",
+        element: <ProductInfo />,
       },
     ],
   },

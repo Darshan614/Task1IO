@@ -40,6 +40,7 @@ function Posts() {
                 price={prod.price}
                 description={prod.description}
                 imageURL={prod.imageURL}
+                id={prod._id}
               />
             );
           })}

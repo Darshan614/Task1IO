@@ -92,6 +92,7 @@ function Login() {
         if (data.message === "Login successful") {
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", data.role);
+
           console.log(localStorage.getItem("token"));
           dispatch(authActions.login(data.role));
           navigate("/");
