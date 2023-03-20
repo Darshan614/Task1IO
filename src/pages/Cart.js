@@ -5,12 +5,14 @@ import HorizontalCard from "../Components/UI/HorizontalCard";
 import Button from "../Components/UI/Button";
 
 function Cart() {
-  // const cart = useSelector((state) => state.cart.cartList);
-  const cart = localStorage.getItem("cart").split(" ");
+  const cart = useSelector((state) => state.cart.cart);
+  console.log(cart.cartList);
+  // const cart = localStorage.getItem("cart").split(" ");
   const [productList, setproductList] = useState([]);
   let cartdata = [];
-  cart.forEach((c) => {
-    cartdata.push({ id: c });
+  cart.cartList.forEach((c) => {
+    console.log("c", c);
+    cartdata.push({ id: c[0] });
   });
   console.log(cartdata);
   useEffect(() => {

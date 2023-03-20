@@ -11,8 +11,9 @@ html {
 body {
   margin: 0;
   background: #474bff;
-background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
-background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%);
+/* background: -webkit-linear-gradient(308deg, #3438f0 0%, #48cbff 100%);
+background: linear-gradient(170deg, #3438f0 0%, #3c87dd 100%); */
+background-color: black;
 min-height: 100vh;
   color: white;
 }

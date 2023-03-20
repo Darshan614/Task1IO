@@ -10,7 +10,7 @@ function HorizontalCard(props) {
         <div class="row g-0">
           <div className={`col-md-4 ${classes.mycard}`}>
             <img
-              src={props.prod.imageURL}
+              src={props.prod.imageURLs[0]}
               className={`img-fluid rounded-start ${classes.img}`}
               alt="..."
             />

@@ -45,3 +45,14 @@
     color: white;
     cursor: pointer;
 }
+
+.elip{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cards:hover{
+    cursor: pointer;
+    box-shadow: 8px 8px rgb(46, 186, 221);
+}
