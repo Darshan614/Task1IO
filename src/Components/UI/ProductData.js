@@ -15,7 +15,8 @@ function ProductData(props) {
   };
   const dispatch = useDispatch();
   const addtoCart = () => {
-    dispatch(cartActions.addToCart([props.id, 1]));
+    const key = props.id;
+    dispatch(cartActions.addToCart({ [key]: 1 }));
   };
   useEffect(() => {
     setimage(props.pimageURL);

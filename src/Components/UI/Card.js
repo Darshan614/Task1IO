@@ -7,8 +7,10 @@ function Card(props) {
   const dispatch = useDispatch();
   const params = useParams();
   const navigate = useNavigate();
-  const onAddProduct = () => {
-    dispatch(cartActions.addToCart([props.id, 1]));
+  const onAddProduct = (e) => {
+    e.stopPropagation();
+    const key = props.id;
+    dispatch(cartActions.addToCart({ [key]: 1 }));
     // let cart = localStorage.getItem("cart");
     // if (!cart == "") cart += " ";
     // cart += props.id;

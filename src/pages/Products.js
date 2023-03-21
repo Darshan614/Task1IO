@@ -74,6 +74,7 @@ function Posts() {
           })}
         </div>
       </div>
+
       <div style={{ display: "flex", justifyContent: "center" }}>
         {page > 1 && <SmallButton onclick={onPrev} title="Prev" />}
         {count > page * 12 && <SmallButton onclick={onNext} title="Next" />}

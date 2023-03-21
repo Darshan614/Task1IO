@@ -1,21 +1,32 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import classes from "./Cart.module.css";
 import HorizontalCard from "../Components/UI/HorizontalCard";
 import Button from "../Components/UI/Button";
+import { cartActions } from "../store/index";
 
 function Cart() {
+  const dispatch = useDispatch();
+  const deleteCart = () => {
+    dispatch(cartActions.removeCart());
+  };
   const cart = useSelector((state) => state.cart.cart);
-  console.log(cart.cartList);
   // const cart = localStorage.getItem("cart").split(" ");
   const [productList, setproductList] = useState([]);
-  let cartdata = [];
-  cart.cartList.forEach((c) => {
-    console.log("c", c);
-    cartdata.push({ id: c[0] });
-  });
-  console.log(cartdata);
+  // const [cartdata, setcartdata] = useState([]);
+  // useEffect(() => {
+  // let cartdata = [];
+  // cart.cartList.forEach((c) => {
+  //   cartdata.push({ id: Object.keys(c)[0] });
+  // });
+  // }, []);
+
   useEffect(() => {
+    let cartdata = [];
+    cart.cartList.forEach((c) => {
+      cartdata.push({ id: Object.keys(c)[0] });
+    });
+
     fetch("http://localhost:8080/cartData", {
       method: "POST",
       headers: {
@@ -29,17 +40,19 @@ function Cart() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
+        console.log("data in cart", data);
         setproductList(data.productData);
       });
-  }, []);
+  }, [cart]);
 
   return (
     <div style={{ width: "540px", margin: "auto" }}>
       {productList.map((c) => {
         return <HorizontalCard prod={c} />;
       })}
+
       <Button title="Buy Now" />
+      <Button title="Delete Card" onClick={deleteCart} />
     </div>
   );
 }

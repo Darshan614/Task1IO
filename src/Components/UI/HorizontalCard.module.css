@@ -3,10 +3,23 @@
     width: 100%;
 }
 .mycard{
-    height: 150px;
+    height: 190px;
     width: auto;
 }
 .card{
     margin: auto;
     color: black;
+}
+
+.inc{
+    background-color: white;
+    color: black;
+    border: none;
+    width: 25px;
+}
+
+.quantity{
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(250, 228, 200);
 }

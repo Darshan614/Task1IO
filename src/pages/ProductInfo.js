@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductData from "../Components/UI/ProductData";
+import SimilarProducts from "../Components/SimilarProducts";
 function ProductInfo() {
   console.log("pro info");
   const params = useParams();
@@ -12,6 +13,7 @@ function ProductInfo() {
   const [thumbimages, setthumbimages] = useState([]);
   const [rating, setrating] = useState(1);
   const [id, setid] = useState();
+  const [similar, setsimilar] = useState([]);
   useEffect(() => {
     console.log("in usee");
     fetch("http://localhost:8080/productInfo", {
@@ -37,6 +39,22 @@ function ProductInfo() {
         setthumbimages(data.productData.imageURLs);
         setrating(data.productData.rating);
         setid(data.productData._id);
+
+        //data for similar products
+        fetch("http://localhost:8080/similarProducts", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            category: data.productData.category,
+          }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log("similar data", data);
+            setsimilar(data.data);
+          });
       })
       .catch((err) => {
         console.log("errrrrrrrrrrr", err);
@@ -54,6 +72,7 @@ function ProductInfo() {
         rating={rating}
         id={id}
       />
+      <SimilarProducts products={similar} />
     </>
   );
 }

@@ -35,8 +35,54 @@ const cartSlice = createSlice({
   reducers: {
     addToCart(state, action) {
       console.log(action.payload);
-      state.cartList = [...state.cartList, action.payload];
-      console.log(state.cartList);
+      const id = Object.keys(action.payload)[0];
+      let flag = 1;
+      // console.log("after flag", );
+      const newarr = [...state.cartList];
+      for (let a = 0; a < state.cartList.length; a++) {
+        if (id === Object.keys(state.cartList[a])[0]) {
+          console.log("Addddddddddddddddddddddddddd");
+          newarr[a][Object.keys(newarr[a])[0]] += 1;
+          console.log("new arr updated", newarr, Object.values(newarr[a])[0]);
+          state.cartList = newarr;
+          flag = 0;
+        }
+      }
+      if (flag) {
+        state.cartList = [...state.cartList, action.payload];
+      }
+
+      console.log("in add to cart", state.cartList);
+    },
+    removefromcart(state, action) {
+      console.log(action.payload);
+      const id = Object.keys(action.payload)[0];
+      console.log("iddddddddddddddddd", id);
+      const newarr = [...state.cartList];
+      let flag = 1;
+      for (let a = 0; a < state.cartList.length; a++) {
+        if (id === Object.keys(state.cartList[a])[0]) {
+          console.log("here");
+          if (Object.values(state.cartList[a])[0] === 1) {
+            console.log("in iffffffffffffffffffffffffffffffffffffffffffffff");
+            const firsthalf = newarr.slice(0, a);
+            const secondhalf = newarr.slice(-a);
+            firsthalf.concat(secondhalf);
+            console.log(firsthalf, secondhalf);
+            state.cartList = firsthalf;
+            return;
+          } else {
+            console.log("Removeeeeeeeeee");
+            newarr[a][Object.keys(newarr[a])[0]] -= 1;
+            console.log("new arr updated", newarr, Object.values(newarr[a])[0]);
+            state.cartList = newarr;
+            flag = 0;
+          }
+        }
+      }
+    },
+    removeCart(state) {
+      state.cartList = [];
     },
   },
 });
