@@ -6,8 +6,10 @@ import Cart from "./pages/Cart";
 import React from "react";
 import Products from "./pages/Products";
 import Admin from "./pages/Admin";
+import Cancel from "./pages/Cancel";
 import ProductInfo from "./pages/ProductInfo";
 import AddProduct from "./pages/AddProduct";
+import Success from "./pages/Success";
 import { checkAuthLoader, checkRoleLoader } from "./util/auth";
 import { useEffect } from "react";
 import { authActions } from "./store/index";
@@ -23,6 +25,8 @@ const router = createBrowserRouter([
       { path: "/products", element: <Products />, loader: checkAuthLoader },
       { path: "/admin", element: <Admin />, loader: checkRoleLoader },
       { path: "/cart", element: <Cart />, loader: checkAuthLoader },
+      { path: "/success", element: <Success /> },
+      { path: "/cancel", element: <Cancel /> },
       {
         path: "/admin/addproduct",
         element: <AddProduct />,

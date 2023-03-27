@@ -44,14 +44,34 @@ function Cart() {
         setproductList(data.productData);
       });
   }, [cart]);
-
+  const onBuyHandler = (event) => {
+    event.preventDefault();
+    console.log("in buy");
+    fetch("http://localhost:8080/create-checkout-session", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cart: cart,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        window.location.href = data.url;
+      });
+  };
   return (
     <div style={{ width: "540px", margin: "auto" }}>
       {productList.map((c) => {
         return <HorizontalCard prod={c} />;
       })}
-
-      <Button title="Buy Now" />
+      <form onSubmit={onBuyHandler}>
+        <button type="submit">Buy now</button>
+      </form>
+      {/* <Button title="Buy Now" onClick={onBuyHandler}  /> */}
       <Button title="Delete Card" onClick={deleteCart} />
     </div>
   );
