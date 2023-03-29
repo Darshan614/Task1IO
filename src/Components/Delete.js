@@ -9,106 +9,49 @@ import Error from "./UI/Error";
 
 function Delete() {
   const navigate = useNavigate();
-  const [productname, setproductname] = useState();
-  const [productnamevalid, setproductnamevalid] = useState();
-  const productnameChangeHandler = (event) => {
-    setproductname(event.target.value);
-    setproductnamevalid(
+  const [email, setemail] = useState();
+  const [emailvalid, setemailvalid] = useState();
+  const emailChangeHandler = (event) => {
+    setemail(event.target.value);
+    setemailvalid(
       validatefield(
         {
           required: true,
-          maxlength: 10,
-          minlength: 2,
+          email: true,
         },
         event.target.value
       )
     );
   };
-  const [imageurl, setimageurl] = useState();
-  const [imageurlvalid, setimageurlvalid] = useState();
-  const imageurlChangeHandler = (event) => {
-    setimageurl(event.target.value);
-    setimageurlvalid(
+  const [username, setusername] = useState();
+  const [usernamevalid, setusernamevalid] = useState();
+  const usernameChangeHandler = (event) => {
+    setusername(event.target.value);
+    setusernamevalid(
       validatefield(
         {
           required: true,
-          url: true,
-        },
-        event.target.value
-      )
-    );
-  };
-  const [price, setprice] = useState(0);
-  const [pricevalid, setpricevalid] = useState();
-  const priceChangeHandler = (event) => {
-    setprice(event.target.value);
-    setpricevalid(
-      validatefield(
-        {
-          required: true,
-          isnum: true,
-          minValue: 0,
-        },
-        event.target.value
-      )
-    );
-  };
-  const [available, setavailable] = useState();
-  const [availablevalid, setavailablevalid] = useState();
-  const availableChangeHandler = (event) => {
-    setavailable(event.target.value);
-    setavailablevalid(
-      validatefield(
-        {
-          required: true,
-          isnum: true,
-          minValue: 0,
-        },
-        event.target.value
-      )
-    );
-  };
-  const [description, setdescription] = useState();
-  const [descriptionvalid, setdescriptionvalid] = useState();
-  const descriptionChangeHandler = (event) => {
-    setdescription(event.target.value);
-    setdescriptionvalid(
-      validatefield(
-        {
-          minLength: 5,
-          required: true,
-          maxLength: 20,
         },
         event.target.value
       )
     );
   };
   const [error, setError] = useState();
-  const onAddForm = () => {
-    if (
-      productnamevalid !== "valid" ||
-      descriptionvalid !== "valid" ||
-      imageurlvalid !== "valid" ||
-      availablevalid !== "valid" ||
-      pricevalid !== "valid"
-    ) {
+  const onDelete = () => {
+    if (emailvalid !== "valid" || usernamevalid !== "valid") {
       setError("Invalid values");
       return;
     }
     const token = localStorage.getItem("token");
-    console.log(productname, price, imageurl, description, available);
-    fetch("http://localhost:8080/addproduct", {
+    fetch("http://localhost:8080/deleteUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
       body: JSON.stringify({
-        productname: productname,
-        imageURL: imageurl,
-        price: price,
-        availablequantity: available,
-        description: description,
+        username: username,
+        email: email,
       }),
     })
       .then((res) => {
@@ -116,10 +59,8 @@ function Delete() {
       })
       .then((data) => {
         console.log(data);
-        if (data.message === "Product added") {
-          navigate("/products");
-        } else {
-          setError(data.message);
+        if (data.message == "User deleted") {
+          navigate("/admin");
         }
       })
       .catch((err) => {
@@ -133,20 +74,20 @@ function Delete() {
         {error && <Error title={error} />}
         <Title title="Delete User" />
         <TextField
-          label="User Name"
-          req={true}
-          icon="mail-outline"
-          onChange={productnameChangeHandler}
-          valid={productnamevalid}
-        />
-        <TextField
           label="Email"
           req={true}
           icon="mail-outline"
-          onChange={productnameChangeHandler}
-          valid={productnamevalid}
+          onChange={emailChangeHandler}
+          valid={emailvalid}
         />
-        <Button title="Delete User" onClick={onAddForm} />
+        <TextField
+          label="Username"
+          req={true}
+          icon="mail-outline"
+          onChange={usernameChangeHandler}
+          valid={usernamevalid}
+        />
+        <Button title="Delete User" onClick={onDelete} />
       </section>
     </>
   );
