@@ -8,6 +8,7 @@ import validatefield from "../validator/validator";
 function Signup(props) {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const [address, setaddress] = useState("");
   const [confirmpassword, setconfirmpassword] = useState("");
   const [username, setusername] = useState("");
   const [passwordValid, setpasswordValid] = useState("");
@@ -15,12 +16,22 @@ function Signup(props) {
   const [emailValid, setemailValid] = useState("");
   const [error, setError] = useState("");
   const [usernameValid, setusernameValid] = useState("");
+  const [addressValid, setaddressValid] = useState("");
 
   const onUserNameChangeHandler = (event) => {
     setusername(event.target.value);
     setusernameValid(
       validatefield(
         { minLength: 3, maxLength: 10, required: true },
+        event.target.value
+      )
+    );
+  };
+  const onAddressChangeHandler = (event) => {
+    setaddress(event.target.value);
+    setaddressValid(
+      validatefield(
+        { minLength: 6, maxLength: 30, required: true },
         event.target.value
       )
     );
@@ -158,6 +169,13 @@ function Signup(props) {
         valid={confirmpasswordValid}
         icon="lock-closed-outline"
         type="password"
+      />
+      <TextField
+        label="Address"
+        onChange={onAddressChangeHandler}
+        req={true}
+        valid={addressValid}
+        icon="lock-closed-outline"
       />
       <Button onClick={onSubmitSignup} title="Sign up" />
     </>

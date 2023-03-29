@@ -18,55 +18,85 @@ function Navbar() {
 
   return (
     <>
-      <nav className={classes.navbar}>
-        <div>
-          <span className={classes.navlink}>
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? classes.active : classes.inactive
-              }
-            >
-              InfoObjects
-            </NavLink>
-          </span>
-          {roles === "admin" && (
+      <nav
+        class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+        style={{
+          background:
+            "linear-gradient(104.28deg, rgba(255, 255, 255, 0.1) 13.04%,rgba(255, 255, 255, 0.4) 69.71%)",
+          boxShadow: "0px 4px 24px -1px rgba(0, 0, 0, 0.2)",
+          marginBottom: "30px",
+          backdropFilter: "blur(20px)",
+        }}
+      >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
             <span className={classes.navlink}>
               <NavLink
-                to="/Admin"
+                to="/"
                 className={({ isActive }) =>
                   isActive ? classes.active : classes.inactive
                 }
               >
-                Admin
+                <ion-icon
+                  style={{
+                    "font-size": "25px",
+                    "font-weight": "bold",
+                  }}
+                  name="logo-xing"
+                ></ion-icon>
               </NavLink>
             </span>
-          )}
+            {roles === "admin" && (
+              <span className={classes.navlink}>
+                <NavLink
+                  to="/Admin"
+                  className={({ isActive }) =>
+                    isActive ? classes.active : classes.inactive
+                  }
+                >
+                  Admin
+                </NavLink>
+              </span>
+            )}
+            <span className={classes.navlink}>
+              <NavLink
+                to="/products"
+                className={({ isActive }) =>
+                  isActive ? classes.active : classes.inactive
+                }
+              >
+                Products
+              </NavLink>
+            </span>
+          </ul>
           <span className={classes.navlink}>
             <NavLink
-              to="/products"
+              to="/cart"
               className={({ isActive }) =>
                 isActive ? classes.active : classes.inactive
               }
             >
-              Products
+              <ion-icon
+                style={{
+                  "font-size": "25px",
+                  "margin-right": "20px",
+                  "font-weight": "bold",
+                }}
+                name="cart-outline"
+              ></ion-icon>
             </NavLink>
           </span>
-        </div>
-
-        <div>
-          {loggedIn && (
-            <span className={classes.navlink} style={{ "font-size": "25px" }}>
-              <NavLink
-                to="/cart"
-                className={({ isActive }) =>
-                  isActive ? classes.active : classes.inactive
-                }
-              >
-                <ion-icon name="cart-outline"></ion-icon>
-              </NavLink>
-            </span>
-          )}
           {!loggedIn && (
             <span className={classes.navlink}>
               <NavLink
@@ -79,12 +109,62 @@ function Navbar() {
               </NavLink>
             </span>
           )}
+
           {loggedIn && (
-            <span className={classes.navlink}>
-              <button className={classes.logout} onClick={logouthandler}>
-                Logout
+            <div class="dropdown">
+              <button
+                type="button"
+                class="btn btn-secondary dropdown-toggle"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+              >
+                <ion-icon name="person"></ion-icon>
               </button>
-            </span>
+              <div
+                className="dropdown-menu"
+                style={{
+                  left: "-105px",
+                  textAlign: "center",
+                  backgroundColor: "#85888c",
+                }}
+                aria-labelledby="dropdownMenu2"
+              >
+                <button class="dropdown-item" type="button">
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive }) =>
+                      isActive ? classes.act : classes.inact
+                    }
+                  >
+                    My Profile
+                  </NavLink>
+                </button>
+                <button
+                  className={`dropdown-item ${classes.inactivedrop}`}
+                  type="button"
+                >
+                  <NavLink
+                    to="/myorder"
+                    className={({ isActive }) =>
+                      isActive ? classes.act : classes.inact
+                    }
+                  >
+                    My Orders
+                  </NavLink>
+                </button>
+                <button class="dropdown-item" type="button">
+                  {loggedIn && (
+                    <button
+                      class="dropdown-item text-start"
+                      onClick={logouthandler}
+                    >
+                      Logout
+                    </button>
+                  )}
+                </button>
+              </div>
+            </div>
           )}
         </div>
       </nav>

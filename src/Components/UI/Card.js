@@ -21,6 +21,10 @@ function Card(props) {
     const page = "/products/" + props.id;
     navigate(page);
   };
+  let arr = [];
+  for (var i = 0; i < props.rating; i++) {
+    arr.push(<ion-icon className={classes.star} name="star"></ion-icon>);
+  }
   return (
     <div className={`col-md-4 col-lg-3`} style={{ "margin-bottom": "40px" }}>
       <div onClick={productClickHandler} className={`card ${classes.cards}`}>
@@ -33,7 +37,10 @@ function Card(props) {
         </div>
         <div class="card-body">
           <h5 className={`card-title ${classes.elip}`}>{props.title}</h5>
-          <p className={`card-text ${classes.elip}`}>{props.description}</p>
+          <div className={classes.star}>{arr}</div>
+          {/* for (var i = 0; i < props.rating; i++) {
+      arr.push(<ion-icon name="star"></ion-icon>);
+    } */}
         </div>
         <div class="card-footer">
           <small class="text-muted">

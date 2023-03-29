@@ -4,12 +4,15 @@ import classes from "./Cart.module.css";
 import HorizontalCard from "../Components/UI/HorizontalCard";
 import Button from "../Components/UI/Button";
 import { cartActions } from "../store/index";
+import { useNavigate } from "react-router-dom";
 
 function Cart() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteCart = () => {
     dispatch(cartActions.removeCart());
   };
+  const loggedIn = useSelector((state) => state.auth.loggedIn);
   const cart = useSelector((state) => state.cart.cart);
   // const cart = localStorage.getItem("cart").split(" ");
   const [productList, setproductList] = useState([]);
@@ -46,6 +49,10 @@ function Cart() {
   }, [cart]);
   const onBuyHandler = (event) => {
     event.preventDefault();
+    if (!loggedIn) {
+      navigate("/auth");
+      return;
+    }
     console.log("in buy");
     fetch("http://localhost:8080/create-checkout-session", {
       method: "POST",
@@ -68,11 +75,9 @@ function Cart() {
       {productList.map((c) => {
         return <HorizontalCard prod={c} />;
       })}
-      <form onSubmit={onBuyHandler}>
-        <button type="submit">Buy now</button>
-      </form>
-      {/* <Button title="Buy Now" onClick={onBuyHandler}  /> */}
-      <Button title="Delete Card" onClick={deleteCart} />
+
+      <Button title="Buy Now" onClick={onBuyHandler} />
+      <Button title="Delete Cart" onClick={deleteCart} />
     </div>
   );
 }

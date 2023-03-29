@@ -8,12 +8,14 @@ import Products from "./pages/Products";
 import Admin from "./pages/Admin";
 import Cancel from "./pages/Cancel";
 import ProductInfo from "./pages/ProductInfo";
-import AddProduct from "./pages/AddProduct";
+import Modify from "./pages/Modify";
 import Success from "./pages/Success";
 import { checkAuthLoader, checkRoleLoader } from "./util/auth";
 import { useEffect } from "react";
 import { authActions } from "./store/index";
 import { useDispatch } from "react-redux";
+import MyOrders from "./pages/MyOrders";
+import Profile from "./pages/Profile";
 
 const router = createBrowserRouter([
   {
@@ -22,14 +24,16 @@ const router = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/auth", element: <Auth /> },
-      { path: "/products", element: <Products />, loader: checkAuthLoader },
+      { path: "/products", element: <Products /> },
       { path: "/admin", element: <Admin />, loader: checkRoleLoader },
-      { path: "/cart", element: <Cart />, loader: checkAuthLoader },
+      { path: "/cart", element: <Cart /> },
       { path: "/success", element: <Success /> },
       { path: "/cancel", element: <Cancel /> },
+      { path: "/myorder", element: <MyOrders /> },
+      { path: "/profile", element: <Profile /> },
       {
-        path: "/admin/addproduct",
-        element: <AddProduct />,
+        path: "/admin/:modify",
+        element: <Modify />,
         loader: checkRoleLoader,
       },
       {
@@ -41,6 +45,7 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  console.log("in app running");
   const dispatch = useDispatch();
   useEffect(() => {
     const token = localStorage.getItem("token");

@@ -1,9 +1,11 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../store/index";
 
 function Success() {
   const cart = useSelector((state) => state.cart.cart);
   const token = localStorage.getItem("token");
+  const dispatch = useDispatch();
   useEffect(() => {
     fetch("http://localhost:8080/placeOrder", {
       method: "POST",
@@ -20,11 +22,12 @@ function Success() {
       })
       .then((data) => {
         console.log("data", data);
+        dispatch(cartActions.removeCart());
       })
       .catch((err) => {
         console.log(err);
       });
-  }, [cart]);
+  }, []);
   return (
     <p>
       We appreciate your business! If you have any questions, please email

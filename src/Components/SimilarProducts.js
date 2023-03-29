@@ -15,6 +15,7 @@ function SimilarProducts(props) {
               description={prod.description}
               imageURL={prod.imageURLs[0]}
               id={prod._id}
+              rating={prod.rating}
             />
           );
         })}

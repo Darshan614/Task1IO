@@ -1,0 +1,15 @@
+.categories{
+    color: black;
+}
+
+.category{
+    text-align: center;
+    color: black;
+}
+.category:hover{
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}
+.icon{
+    font-size: 220%;
+}

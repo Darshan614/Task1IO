@@ -11,17 +11,19 @@ function Authenticate() {
   };
 
   return (
-    <section className={classes.box}>
-      {formLogin ? <Login /> : <Signup toggle={formToggleHandler} />}
-      {formLogin ? (
-        <Button
-          onClick={formToggleHandler}
-          title="Don't have account? Register"
-        />
-      ) : (
-        <Button onClick={formToggleHandler} title="Already a user? Log in" />
-      )}
-    </section>
+    <div className={classes.parent}>
+      <section className={classes.box}>
+        {formLogin ? <Login /> : <Signup toggle={formToggleHandler} />}
+        {formLogin ? (
+          <Button
+            onClick={formToggleHandler}
+            title="Don't have account? Register"
+          />
+        ) : (
+          <Button onClick={formToggleHandler} title="Already a user? Log in" />
+        )}
+      </section>
+    </div>
   );
 }
 

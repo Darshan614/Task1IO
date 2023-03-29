@@ -1,0 +1,13 @@
+.category{
+    text-align: center;
+    color: black;
+}
+
+.icon{
+    font-size: 220%;
+}
+
+.category:hover{
+    cursor: pointer;
+    border-bottom: 1px solid black;
+}

@@ -1,0 +1,9 @@
+.data{
+    color: black;
+    text-align: center;
+}
+
+.box{
+    margin: auto;
+    width: 50%;
+}
