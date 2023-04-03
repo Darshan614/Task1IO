@@ -3,12 +3,13 @@ import Error from "./UI/Error";
 import TextField from "./UI/TextField";
 import Button from "./UI/Button";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import validatefield from "../validator/validator";
 import { authActions } from "../store/index";
 import { useDispatch } from "react-redux";
 
 function Login() {
+  const [searchParams] = useSearchParams();
   const dispatch = useDispatch();
   const [email, setemail] = useState("");
   const [emailValid, setemailValid] = useState("");
@@ -67,6 +68,7 @@ function Login() {
     }
     return true;
   };
+
   const onSubmitLogin = () => {
     if (!formValidate()) {
       setError("Invalid fields");
@@ -92,16 +94,14 @@ function Login() {
         if (data.message === "Login successful") {
           localStorage.setItem("token", data.token);
           localStorage.setItem("role", data.role);
-
-          console.log(localStorage.getItem("token"));
           dispatch(authActions.login(data.role));
-          navigate("/");
+          const redirectTo = searchParams.get("redirectTo");
+          navigate(redirectTo == null ? "/" : redirectTo);
         } else {
           setError(data.message);
         }
       })
       .catch((err) => {
-        console.log("errrrrrrrrrrr", err);
         setError("Request Failed");
       });
   };

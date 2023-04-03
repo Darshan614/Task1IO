@@ -4,7 +4,7 @@ import classes from "./Cart.module.css";
 import HorizontalCard from "../Components/UI/HorizontalCard";
 import Button from "../Components/UI/Button";
 import { cartActions } from "../store/index";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Cart() {
   const navigate = useNavigate();
@@ -47,10 +47,12 @@ function Cart() {
         setproductList(data.productData);
       });
   }, [cart]);
+  const prevLocation = useLocation();
   const onBuyHandler = (event) => {
     event.preventDefault();
     if (!loggedIn) {
-      navigate("/auth");
+      console.log(prevLocation);
+      navigate(`/auth?redirectTo=${prevLocation.pathname}`);
       return;
     }
     console.log("in buy");

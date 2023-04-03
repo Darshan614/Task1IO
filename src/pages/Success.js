@@ -29,8 +29,8 @@ function Success() {
       });
   }, []);
   return (
-    <p>
-      We appreciate your business! If you have any questions, please email
+    <p style={{ color: "black" }}>
+      Thanks for shopping! Your order will be delivered soon
       <a href="mailto:orders@example.com">orders@example.com</a>.
     </p>
   );

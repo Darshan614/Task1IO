@@ -71,7 +71,7 @@ function Navbar() {
             )}
             <span className={classes.navlink}>
               <NavLink
-                to="/products"
+                to="/products?category=all"
                 className={({ isActive }) =>
                   isActive ? classes.active : classes.inactive
                 }

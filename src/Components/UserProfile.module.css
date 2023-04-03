@@ -7,3 +7,24 @@
     margin: auto;
     width: 50%;
 }
+
+.field{
+    width: 90%;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    margin-bottom: 3px;
+    
+}
+
+.key{
+    padding: 5px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.imageicon{
+    font-size: 100px;
+    color: grey;
+}

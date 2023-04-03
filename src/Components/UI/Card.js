@@ -18,7 +18,7 @@ function Card(props) {
     // console.log(localStorage.getItem("cart").split(" "));
   };
   const productClickHandler = () => {
-    const page = "/products/" + props.id;
+    const page = "/product/" + props.id;
     navigate(page);
   };
   let arr = [];

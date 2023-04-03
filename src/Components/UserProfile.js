@@ -43,10 +43,23 @@ function UserProfile() {
   return (
     <div className={classes.data}>
       <div className={classes.box}>
-        My Profile<div>Email:{userprofile.email}</div>
-        <div>Username:{userprofile.username}</div>
-        <div>Address:{userprofile.address}</div>
-        <Button title="Edit User" />
+        <div className={classes.imageicon}>
+          <ion-icon name="person-circle-outline"></ion-icon>
+        </div>
+        <div className={`row ${classes.field}`}>
+          <div className={`col-md-5 ${classes.key}`}>Email</div>
+          <div className={`col-md-5 ${classes.key}`}>{userprofile.email}</div>
+        </div>
+        <div className={`row ${classes.field}`}>
+          <div className={`col-md-5 ${classes.key}`}>Username</div>
+          <div className={`col-md-5 ${classes.key}`}>
+            {userprofile.username}
+          </div>
+        </div>
+        <div className={`row ${classes.field}`}>
+          <div className={`col-md-5 ${classes.key}`}>Address</div>
+          <div className={`col-md-5 ${classes.key}`}>{userprofile.address}</div>
+        </div>
         <Button title="Deactivate" onClick={oninactivate} />
       </div>
     </div>

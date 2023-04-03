@@ -37,7 +37,7 @@ const router = createBrowserRouter([
         loader: checkRoleLoader,
       },
       {
-        path: "/products/:productId",
+        path: "/product/:productId",
         element: <ProductInfo />,
       },
     ],

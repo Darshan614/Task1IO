@@ -24,6 +24,21 @@ function AddForm() {
       )
     );
   };
+  const [category, setcategory] = useState();
+  const [categoryvalid, setcategoryvalid] = useState();
+  const categoryChangeHandler = (event) => {
+    setcategory(event.target.value);
+    setcategoryvalid(
+      validatefield(
+        {
+          required: true,
+          maxlength: 10,
+          minlength: 2,
+        },
+        event.target.value
+      )
+    );
+  };
   const [imageurl, setimageurl] = useState();
   const [imageurlvalid, setimageurlvalid] = useState();
   const imageurlChangeHandler = (event) => {
@@ -109,6 +124,7 @@ function AddForm() {
         price: price,
         availablequantity: available,
         description: description,
+        category: category,
       }),
     })
       .then((res) => {
@@ -152,6 +168,13 @@ function AddForm() {
           icon="pricetag-outline"
           onChange={priceChangeHandler}
           valid={pricevalid}
+        />
+        <TextField
+          label="Category"
+          req={true}
+          icon="apps-outline"
+          onChange={categoryChangeHandler}
+          valid={categoryvalid}
         />
         <TextField
           label="Available Quantity"

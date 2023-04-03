@@ -64,12 +64,9 @@ const cartSlice = createSlice({
         if (id === Object.keys(state.cartList[a])[0]) {
           console.log("here");
           if (Object.values(state.cartList[a])[0] === 1) {
-            console.log("in iffffffffffffffffffffffffffffffffffffffffffffff");
             const firsthalf = newarr.slice(0, a);
-            const secondhalf = newarr.slice(-a);
-            firsthalf.concat(secondhalf);
-            console.log(firsthalf, secondhalf);
-            state.cartList = firsthalf;
+            const secondhalf = newarr.slice(a + 1, newarr.length);
+            state.cartList = [...firsthalf, ...secondhalf];
             return;
           } else {
             console.log("Removeeeeeeeeee");

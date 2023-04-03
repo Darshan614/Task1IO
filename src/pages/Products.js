@@ -1,20 +1,29 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Loading from "../Components/Loading";
 import Card from "../Components/UI/Card";
-import SmallButton from "../Components/UI/SmallButton";
 
-function Posts() {
+function Products() {
+  const [filter, setfilter] = useSearchParams();
+  const params = [];
+  for (let entry of filter.entries()) {
+    params.push(entry);
+  }
+  console.log(params, Object.fromEntries([...filter]));
   const navigate = useNavigate();
   const [last, setlast] = useState();
   const [loading, setloading] = useState(true);
   const [productList, setproductList] = useState([]);
   const [page, setpage] = useState(1);
   const [count, setCount] = useState();
-  const [prev, setprev] = useState();
-  const [next, setnext] = useState();
-  const [curr, setcurr] = useState();
+  const [category, setcategory] = useState(
+    Object.fromEntries([...filter])["category"]
+  );
+  console.log(params, Object.fromEntries([...filter])["category"]);
+  // const [prev, setprev] = useState();
+  // const [next, setnext] = useState();
+  // const [curr, setcurr] = useState();
   const onNext = () => {
     setpage((page) => page + 1);
     document.documentElement.scrollTop = 0;
@@ -30,7 +39,8 @@ function Posts() {
     setpage(last);
   };
   useEffect(() => {
-    fetch("http://localhost:8080/productCount")
+    const url = "http://localhost:8080/productCount/" + category;
+    fetch(url)
       .then((res) => res.json())
       .then((data) => {
         setCount(data.count);
@@ -39,16 +49,12 @@ function Posts() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [category]);
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const URL = "http://localhost:8080/products/" + page;
+    setcategory(Object.fromEntries([...filter])["category"]);
+    const URL = `http://localhost:8080/products?page=${page}&category=${category}`;
     console.log(URL);
-    fetch(URL, {
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
+    fetch(URL)
       .then((res) => {
         return res.json();
       })
@@ -61,10 +67,10 @@ function Posts() {
           setloading(false);
           if (data.products.length === 0) setpage((page) => page - 1);
         } else {
-          navigate("/auth");
+          navigate("/");
         }
       });
-  }, [navigate, page]);
+  }, [navigate, page, category, filter]);
   return (
     <>
       {loading && <Loading />}
@@ -95,14 +101,14 @@ function Posts() {
         {/* {count > page * 12 && <SmallButton onclick={onNext} title="Next" />} */}
         <nav aria-label="Page navigation example">
           <ul class="pagination">
-            {page != 1 && (
+            {page !== 1 && (
               <li class="page-item" onClick={onFirst}>
                 <span class="page-link" href="#">
                   1
                 </span>
               </li>
             )}
-            {page - 1 != 1 && page - 1 > 0 && (
+            {page - 1 !== 1 && page - 1 > 0 && (
               <li class="page-item" onClick={onPrev}>
                 <span class="page-link" href="#">
                   {page - 1}p
@@ -127,7 +133,7 @@ function Posts() {
                 </span>
               </li>
             )}
-            {page != last && (
+            {page !== last && (
               <li class="page-item" onClick={onLast}>
                 <span class="page-link" href="#">
                   {last}
@@ -141,4 +147,4 @@ function Posts() {
   );
 }
 
-export default Posts;
+export default Products;
