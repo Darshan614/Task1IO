@@ -55,8 +55,13 @@
 
 .star{
     color: rgb(241, 177, 58);
+    display: flex;
+    justify-content: space-between;
 }
-
+.nor{
+    color: black;
+    font-size: smaller;
+}
 .cards:hover{
     cursor: pointer;
     box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.7);

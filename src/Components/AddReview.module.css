@@ -1,0 +1,46 @@
+.box{
+    margin-top: 20px;
+}
+
+.form{
+    color: black;
+    margin: auto;
+    width: 50%;
+}
+
+.rating{
+    display: flex;
+}
+
+.rating input[type="radio"]{
+    -webkit-appearance: none;
+}
+
+.stars{
+    margin-left: 5px;
+    color: black;
+    display: flex;
+    font-size: large
+}
+
+.star:hover{
+    color: rgb(255, 123, 0);
+    cursor: pointer;
+}
+
+.inputs{
+    margin: auto;
+    width: 100%
+}
+
+.textarea{
+    width: 100%;
+}
+
+.staractive{
+    color: orange;
+    cursor: pointer;
+}
+.starinactive:hover{
+    cursor: pointer;
+}

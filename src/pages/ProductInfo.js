@@ -2,10 +2,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductData from "../Components/UI/ProductData";
 import SimilarProducts from "../Components/SimilarProducts";
+import Reviews from "../Components/Reviews";
+import AddReview from "../Components/AddReview";
+
 function ProductInfo() {
+  const errorHandler = () => {
+    setError(null);
+  };
   console.log("pro info");
   const params = useParams();
   // console.log(typeof params.productId);
+
   const [pname, setpname] = useState();
   const [pprice, setpprice] = useState();
   const [pdesc, setpdesc] = useState();
@@ -13,9 +20,9 @@ function ProductInfo() {
   const [thumbimages, setthumbimages] = useState([]);
   const [rating, setrating] = useState(1);
   const [id, setid] = useState();
+  const [error, setError] = useState();
   const [similar, setsimilar] = useState([]);
   useEffect(() => {
-    console.log("in usee");
     fetch("http://localhost:8080/productInfo", {
       method: "POST",
       headers: {
@@ -26,12 +33,9 @@ function ProductInfo() {
       }),
     })
       .then((res) => {
-        console.log("in then");
-        console.log(res.status);
         return res.json();
       })
       .then((data) => {
-        console.log("data", data);
         setpname(data.productData.productname);
         setpprice(data.productData.price);
         setpdesc(data.productData.description);
@@ -52,12 +56,11 @@ function ProductInfo() {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("similar data", data);
             setsimilar(data.data);
           });
       })
       .catch((err) => {
-        console.log("errrrrrrrrrrr", err);
+        // console.log("errrrrrrrrrrr", err);
       });
   }, [params.productId]);
   return (
@@ -73,6 +76,8 @@ function ProductInfo() {
         id={id}
       />
       <SimilarProducts products={similar} />
+      <Reviews />
+      <AddReview />
     </>
   );
 }

@@ -90,6 +90,7 @@ function Products() {
                 imageURL={prod.imageURLs[0]}
                 id={prod._id}
                 rating={prod.rating}
+                numOfRev={prod.numberOfReviews}
               />
             );
           })}

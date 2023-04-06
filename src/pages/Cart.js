@@ -5,24 +5,19 @@ import HorizontalCard from "../Components/UI/HorizontalCard";
 import Button from "../Components/UI/Button";
 import { cartActions } from "../store/index";
 import { useLocation, useNavigate } from "react-router-dom";
+import Modal from "../Components/UI/Modal";
 
 function Cart() {
+  const [showModal, setshowModal] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteCart = () => {
+    setshowModal(false);
     dispatch(cartActions.removeCart());
   };
   const loggedIn = useSelector((state) => state.auth.loggedIn);
   const cart = useSelector((state) => state.cart.cart);
-  // const cart = localStorage.getItem("cart").split(" ");
   const [productList, setproductList] = useState([]);
-  // const [cartdata, setcartdata] = useState([]);
-  // useEffect(() => {
-  // let cartdata = [];
-  // cart.cartList.forEach((c) => {
-  //   cartdata.push({ id: Object.keys(c)[0] });
-  // });
-  // }, []);
 
   useEffect(() => {
     let cartdata = [];
@@ -72,6 +67,9 @@ function Cart() {
         window.location.href = data.url;
       });
   };
+  const confirmation = () => {
+    setshowModal(true);
+  };
   return (
     <div style={{ width: "540px", margin: "auto" }}>
       {productList.map((c) => {
@@ -79,7 +77,10 @@ function Cart() {
       })}
 
       <Button title="Buy Now" onClick={onBuyHandler} />
-      <Button title="Delete Cart" onClick={deleteCart} />
+      <Button title="Delete Cart" onClick={confirmation} />
+      {showModal && (
+        <Modal title="Confirm!" message="Delete Cart?" onClick={deleteCart} />
+      )}
     </div>
   );
 }

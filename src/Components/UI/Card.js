@@ -22,7 +22,7 @@ function Card(props) {
     navigate(page);
   };
   let arr = [];
-  for (var i = 0; i < props.rating; i++) {
+  for (var i = 1; i <= Math.round(props.rating); i++) {
     arr.push(<ion-icon className={classes.star} name="star"></ion-icon>);
   }
   return (
@@ -37,14 +37,18 @@ function Card(props) {
         </div>
         <div class="card-body">
           <h5 className={`card-title ${classes.elip}`}>{props.title}</h5>
-          <div className={classes.star}>{arr}</div>
+          <div className={classes.star}>
+            <div>{arr}</div>
+            <div className={classes.nor}>({props.numOfRev})</div>
+          </div>
+
           {/* for (var i = 0; i < props.rating; i++) {
       arr.push(<ion-icon name="star"></ion-icon>);
     } */}
         </div>
         <div class="card-footer">
           <small class="text-muted">
-            $ {props.price}
+            &#8377; {props.price}
             <button onClick={onAddProduct} className={classes.addcart}>
               Add to Cart
             </button>

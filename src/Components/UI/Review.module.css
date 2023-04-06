@@ -1,0 +1,25 @@
+.review{
+    color: black;
+    border: 1px solid black;
+    border-radius: 5px; 
+    margin-top: 10px;
+}
+
+.name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.username{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: small;
+}
+
+.date{
+    font-style: italic;
+    font-size: small;
+}
+
+.star{
+    color: rgb(241, 177, 58);
+}

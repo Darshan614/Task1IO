@@ -22,7 +22,7 @@ function ProductData(props) {
     setimage(props.pimageURL);
     setthumbimages(props.thumbimages);
     let arr = [];
-    for (var i = 0; i < props.rating; i++) {
+    for (var i = 1; i <= Math.round(props.rating); i++) {
       arr.push(<ion-icon name="star"></ion-icon>);
     }
     setstars(arr);
@@ -56,7 +56,7 @@ function ProductData(props) {
             </div>
             <div className={classes.stars}>{stars}</div>
             <div className={classes.price}>
-              <h3>$ {props.pprice}.00</h3>
+              <h3>&#8377; {props.pprice}.00</h3>
             </div>
             <div></div>
           </div>

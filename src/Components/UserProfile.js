@@ -4,9 +4,11 @@ import classes from "./UserProfile.module.css";
 import { authActions } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Modal from "../Components/UI/Modal";
 
 function UserProfile() {
   const dispatch = useDispatch();
+  const [showModal, setshowModal] = useState(false);
   const navigate = useNavigate();
   const [userprofile, setuserprofile] = useState({});
   useEffect(() => {
@@ -23,7 +25,8 @@ function UserProfile() {
         setuserprofile(data.user);
       });
   }, []);
-  const oninactivate = () => {
+  const ondeactivate = () => {
+    setshowModal(false);
     const token = localStorage.getItem("token");
     fetch("http://localhost:8080/inactivateUser", {
       method: "GET",
@@ -39,6 +42,9 @@ function UserProfile() {
         dispatch(authActions.logout());
         navigate("/");
       });
+  };
+  const confirmation = () => {
+    setshowModal(true);
   };
   return (
     <div className={classes.data}>
@@ -60,7 +66,14 @@ function UserProfile() {
           <div className={`col-md-5 ${classes.key}`}>Address</div>
           <div className={`col-md-5 ${classes.key}`}>{userprofile.address}</div>
         </div>
-        <Button title="Deactivate" onClick={oninactivate} />
+        <Button title="Deactivate" onClick={confirmation} />
+        {showModal && (
+          <Modal
+            title="Confirm!"
+            message="Are you sure you want to deactivate account?"
+            onClick={ondeactivate}
+          />
+        )}
       </div>
     </div>
   );
