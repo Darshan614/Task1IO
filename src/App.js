@@ -10,12 +10,15 @@ import Cancel from "./pages/Cancel";
 import ProductInfo from "./pages/ProductInfo";
 import Modify from "./pages/Modify";
 import Success from "./pages/Success";
-import { checkAuthLoader, checkRoleLoader } from "./util/auth";
+import { checkRoleLoader } from "./util/auth";
 import { useEffect } from "react";
 import { authActions } from "./store/index";
 import { useDispatch } from "react-redux";
 import MyOrders from "./pages/MyOrders";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
+import Update from "./Components/Update";
+import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +43,14 @@ const router = createBrowserRouter([
         path: "/product/:productId",
         element: <ProductInfo />,
       },
+      {
+        path: "/reset/:token",
+        element: <ResetPassword />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
+      },
     ],
   },
 ]);
@@ -49,7 +60,7 @@ function App() {
   const dispatch = useDispatch();
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:8080/checklogin", {
+    fetch("https://ecommerceio.onrender.com/checklogin", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,

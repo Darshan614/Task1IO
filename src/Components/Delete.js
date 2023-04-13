@@ -43,7 +43,7 @@ function Delete() {
       return;
     }
     const token = localStorage.getItem("token");
-    fetch("http://localhost:8080/deleteUser", {
+    fetch("https://ecommerceio.onrender.com/deleteUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

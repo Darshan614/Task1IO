@@ -3,7 +3,7 @@ import classes from "./SimilarProducts.module.css";
 
 function SimilarProducts(props) {
   return (
-    <div className="container px-4" style={{ color: "black" }}>
+    <div className={`container px-4 ${classes.box}`}>
       <div className={classes.title}>Similar Products</div>
       <div className="row gy-5 gx-5">
         {console.log(props)}

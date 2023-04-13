@@ -1,0 +1,93 @@
+.box{
+    background-color: white;
+    width: fit-content;
+    margin: auto;
+    padding: 2%;
+    transition: ease-in-out 0.4s;
+    margin-top: 30px;
+}
+.box:hover{
+    box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.7);
+}
+
+.field{
+    display: grid;
+    width: 400px;
+    /* background-color: aquamarine; */
+    margin-top: 20px;
+    border-bottom: 2px solid grey;
+    position: relative;
+    color: grey;
+    /* margin-bottom: 35px; */
+}
+
+.fieldbox{
+    margin-bottom: 35px;
+}
+
+.error{
+    font-size: 0.7em;
+    color: red;
+    font-style: italic;
+}
+
+.label{
+    position: absolute;
+    font-size: 0.8em;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    transform: translateY(-50%);
+    top: -4px;
+    transition: .3s;
+}
+
+.title{
+    text-align: center;
+    background-color: grey;
+    padding: 5%;
+    margin-bottom: 30px;
+    color: white;
+    font-size: 1.5em;
+}
+
+.textfield{
+    border: none;
+    outline: none;
+    /* align-items: baseline; */
+    height: 20px;
+    font-size: 1em;
+}
+
+.button{
+    width: 100%;
+    padding: 2%;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background-color: grey;
+    margin: 5px;
+    color: white;
+}
+.button:hover{
+    cursor: pointer;
+    background-color: rgb(104, 101, 101);
+}
+
+/* .textfield:focus ~ label,.textfield ~ :valid{
+    top: -12px;
+    transition: .3s;
+} */
+.field input:focus ~label, .field input:valid ~label{
+    top: -12px;
+}
+
+
+.field ion-icon{
+    position: absolute;
+    right: 8px;
+}
+
+.forget{
+    font-size: smaller;
+}

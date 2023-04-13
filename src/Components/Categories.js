@@ -5,21 +5,27 @@ import { useNavigate } from "react-router-dom";
 function Categories() {
   const navigate = useNavigate();
   const smartphones = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=Mobile");
   };
   const tv = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=TV");
   };
   const camera = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=Camera");
   };
   const watches = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=watches");
   };
   const headphone = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=Sound");
   };
   const laptop = () => {
+    document.documentElement.scrollTop = 0;
     navigate("/products?category=Laptop");
   };
   return (

@@ -5,11 +5,11 @@
 
 .box{
     margin: auto;
-    width: 50%;
+    /* width: 50%; */
 }
 
 .field{
-    width: 90%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     margin: auto;

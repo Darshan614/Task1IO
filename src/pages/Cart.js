@@ -6,9 +6,11 @@ import Button from "../Components/UI/Button";
 import { cartActions } from "../store/index";
 import { useLocation, useNavigate } from "react-router-dom";
 import Modal from "../Components/UI/Modal";
+import Loading from "../Components/Loading";
 
 function Cart() {
   const [showModal, setshowModal] = useState(false);
+  const [loading, setloading] = useState(true);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const deleteCart = () => {
@@ -25,7 +27,7 @@ function Cart() {
       cartdata.push({ id: Object.keys(c)[0] });
     });
 
-    fetch("http://localhost:8080/cartData", {
+    fetch("https://ecommerceio.onrender.com/cartData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +41,7 @@ function Cart() {
       })
       .then((data) => {
         console.log("data in cart", data);
+        setloading(false);
         setproductList(data.productData);
       });
   }, [cart]);
@@ -51,7 +54,7 @@ function Cart() {
       return;
     }
     console.log("in buy");
-    fetch("http://localhost:8080/create-checkout-session", {
+    fetch("https://ecommerceio.onrender.com/create-checkout-session", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -71,17 +74,38 @@ function Cart() {
     setshowModal(true);
   };
   return (
-    <div style={{ width: "540px", margin: "auto" }}>
-      {productList.map((c) => {
-        return <HorizontalCard prod={c} />;
-      })}
-
-      <Button title="Buy Now" onClick={onBuyHandler} />
-      <Button title="Delete Cart" onClick={confirmation} />
-      {showModal && (
-        <Modal title="Confirm!" message="Delete Cart?" onClick={deleteCart} />
+    <>
+      {loading && <Loading />}
+      {!loading && productList.length === 0 && (
+        <p className={classes.empty}>
+          Cart is empty
+          <p className={classes.icon}>
+            <ion-icon name="sad-outline"></ion-icon>
+          </p>
+        </p>
       )}
-    </div>
+      {!loading && (
+        <div className="container">
+          {productList.map((c) => {
+            return <HorizontalCard prod={c} />;
+          })}
+
+          {productList.length !== 0 && (
+            <Button title="Buy Now" onClick={onBuyHandler} />
+          )}
+          {productList.length !== 0 && (
+            <Button title="Delete Cart" onClick={confirmation} />
+          )}
+          {showModal && (
+            <Modal
+              title="Confirm!"
+              message="Delete Cart?"
+              onClick={deleteCart}
+            />
+          )}
+        </div>
+      )}
+    </>
   );
 }
 

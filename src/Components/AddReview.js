@@ -20,7 +20,7 @@ function AddReview() {
   const onSubmitReview = () => {
     console.log(rating, feedback);
     const token = localStorage.getItem("token");
-    fetch("http://localhost:8080/addReview", {
+    fetch("https://ecommerceio.onrender.com/addReview", {
       method: "POST",
       headers: {
         Authorization: "Bearer " + token,

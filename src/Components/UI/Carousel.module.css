@@ -1,0 +1,23 @@
+.image{
+    height: 450px;
+    margin-left: 130px; 
+}
+
+.text{
+    top: 170px;
+    margin-left: 580px; 
+}
+
+@media screen and (max-width:700px){
+    .image{
+        height: 200px;
+        width: 120px;
+        margin-left: 30px;
+    }
+    .text{
+        margin-left: 120px;
+        top: 18px;
+        font-size: smaller;
+        width: 150px;
+    }
+}

@@ -19,13 +19,15 @@ function Navbar() {
   return (
     <>
       <nav
-        class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top"
+        class="navbar navbar-expand-lg navbar-dark sticky-top"
         style={{
-          background:
-            "linear-gradient(104.28deg, rgba(255, 255, 255, 0.1) 13.04%,rgba(255, 255, 255, 0.4) 69.71%)",
-          boxShadow: "0px 4px 24px -1px rgba(0, 0, 0, 0.2)",
+          // background:
+          //   "linear-gradient(104.28deg, rgba(255, 255, 255, 0.1) 13.04%,rgba(255, 255, 255, 0.4) 69.71%)",
+          // boxShadow: "0px 4px 24px -1px rgba(0, 0, 0, 0.2)",
+          // marginBottom: "30px",
+          // backdropFilter: "blur(20px)",
+          backgroundColor: "black",
           marginBottom: "30px",
-          backdropFilter: "blur(20px)",
         }}
       >
         <button
@@ -41,7 +43,11 @@ function Navbar() {
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
           <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <span className={classes.navlink}>
+            <span
+              className={classes.navlink}
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
               <NavLink
                 to="/"
                 className={({ isActive }) =>
@@ -58,7 +64,11 @@ function Navbar() {
               </NavLink>
             </span>
             {roles === "admin" && (
-              <span className={classes.navlink}>
+              <span
+                className={classes.navlink}
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+              >
                 <NavLink
                   to="/Admin"
                   className={({ isActive }) =>
@@ -69,7 +79,11 @@ function Navbar() {
                 </NavLink>
               </span>
             )}
-            <span className={classes.navlink}>
+            <span
+              className={classes.navlink}
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
+            >
               <NavLink
                 to="/products?category=all"
                 className={({ isActive }) =>
@@ -80,36 +94,45 @@ function Navbar() {
               </NavLink>
             </span>
           </ul>
-          <span className={classes.navlink}>
-            <NavLink
-              to="/cart"
-              className={({ isActive }) =>
-                isActive ? classes.active : classes.inactive
-              }
+          <ul class="navbar-nav mt-2 mt-lg-0">
+            <span
+              className={classes.navlink}
+              data-toggle="collapse"
+              data-target=".navbar-collapse.show"
             >
-              <ion-icon
-                style={{
-                  "font-size": "25px",
-                  "margin-right": "20px",
-                  "font-weight": "bold",
-                }}
-                name="cart-outline"
-              ></ion-icon>
-            </NavLink>
-          </span>
-          {!loggedIn && (
-            <span className={classes.navlink}>
               <NavLink
-                to="/auth"
+                to="/cart"
                 className={({ isActive }) =>
                   isActive ? classes.active : classes.inactive
                 }
               >
-                Login
+                <ion-icon
+                  style={{
+                    "font-size": "25px",
+                    "margin-right": "20px",
+                    "font-weight": "bold",
+                  }}
+                  name="cart-outline"
+                ></ion-icon>
               </NavLink>
             </span>
-          )}
-
+            {!loggedIn && (
+              <span
+                className={classes.navlink}
+                data-toggle="collapse"
+                data-target=".navbar-collapse.show"
+              >
+                <NavLink
+                  to="/auth"
+                  className={({ isActive }) =>
+                    isActive ? classes.active : classes.inactive
+                  }
+                >
+                  Login
+                </NavLink>
+              </span>
+            )}
+          </ul>
           {loggedIn && (
             <div class="dropdown">
               <button
@@ -122,15 +145,15 @@ function Navbar() {
                 <ion-icon name="person"></ion-icon>
               </button>
               <div
-                className="dropdown-menu"
-                style={{
-                  left: "-105px",
-                  textAlign: "center",
-                  backgroundColor: "#85888c",
-                }}
+                className={`dropdown-menu ${classes.drop}`}
                 aria-labelledby="dropdownMenu2"
               >
-                <button class="dropdown-item" type="button">
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
                   <NavLink
                     to="/profile"
                     className={({ isActive }) =>
@@ -143,6 +166,8 @@ function Navbar() {
                 <button
                   className={`dropdown-item ${classes.inactivedrop}`}
                   type="button"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
                 >
                   <NavLink
                     to="/myorder"
@@ -153,7 +178,12 @@ function Navbar() {
                     My Orders
                   </NavLink>
                 </button>
-                <button class="dropdown-item" type="button">
+                <button
+                  class="dropdown-item"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target=".navbar-collapse.show"
+                >
                   {loggedIn && (
                     <button
                       class="dropdown-item text-start"

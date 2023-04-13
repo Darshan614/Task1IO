@@ -16,10 +16,15 @@
     color: black;
     border: none;
     width: 25px;
+    font-weight: 900;
 }
 
 .quantity{
     padding-left: 6px;
     padding-right: 6px;
     background-color: rgb(250, 228, 200);
+}
+
+.inc:hover{
+    cursor: pointer;
 }

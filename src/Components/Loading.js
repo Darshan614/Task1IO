@@ -3,7 +3,9 @@ import classes from "./Loading.module.css";
 function Loading() {
   return (
     <>
-      <div className={classes.loading}>....Loading</div>
+      <div className={classes.loader}>
+        <div className={classes.spinner}></div>
+      </div>
     </>
   );
 }

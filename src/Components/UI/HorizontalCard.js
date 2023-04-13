@@ -48,14 +48,14 @@ function HorizontalCard(props) {
         style={{ "max-width": "540px" }}
       >
         <div class="row g-0">
-          <div className={`col-md-4 col-sm-4 col-4 ${classes.mycard}`}>
+          <div className={`col-md-4 col-12 ${classes.mycard}`}>
             <img
               src={props.prod.imageURLs[0]}
               className={`img-fluid rounded-start ${classes.img}`}
               alt="..."
             />
           </div>
-          <div class="col-md-8 col-sm-8 col-8">
+          <div class="col-md-8 col-12">
             <div class="card-body">
               <h5 class="card-title">{props.prod.productname}</h5>
               <p class="card-text">{props.prod.description}</p>

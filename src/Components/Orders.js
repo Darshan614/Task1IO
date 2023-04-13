@@ -1,12 +1,14 @@
 import Order from "./UI/Order";
 import { useEffect, useState } from "react";
+import Loading from "./Loading";
 
 function Orders() {
   const [orderData, setorderData] = useState([]);
   const [date, setdate] = useState();
+  const [loading, setloading] = useState(true);
   useEffect(() => {
     const token = localStorage.getItem("token");
-    fetch("http://localhost:8080/userOrders", {
+    fetch("https://ecommerceio.onrender.com/userOrders", {
       method: "GET",
       headers: {
         Authorization: "Bearer " + token,
@@ -18,6 +20,7 @@ function Orders() {
       .then((data) => {
         console.log(data);
         setorderData(data.orders);
+        setloading(false);
       });
   }, []);
 
@@ -33,7 +36,14 @@ function Orders() {
     const milliseconds = date.getMilliseconds(); // 418
     const d = day + "/" + month + "/" + year;
     const t = hours + ":" + minutes + ":" + seconds;
-    return <Order amount={order.total} d={d} t={t} products={order.products} />;
+    return (
+      <>
+        {loading && <Loading />}
+        {!loading && (
+          <Order amount={order.total} d={d} t={t} products={order.products} />
+        )}
+      </>
+    );
   });
 }
 

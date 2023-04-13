@@ -1,11 +1,60 @@
 .footer{
-    background: linear-gradient(104.28deg, rgb(72 78 83) 13.04%,rgb(133 137 140) 69.71%);
-    box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.2);
-    margin-top: 30px;
-    backdrop-filter: blur(20px);
+    background-color:black
 }
 
 .icons{
-    color: rgb(0, 0, 0);
+    color: white;
     font-size: 20px;
+    margin-left: 3px;
+}
+
+
+.navlink{
+    margin: 7px;
+    border-radius: 2px;
+    color: white;
+    text-decoration: none;
+}
+.active,.inactive{
+    color: rgb(238, 183, 81);
+    padding: 5px;
+    text-decoration: none;
+    padding-left: 7px;
+    padding-right: 7px;
+    border-radius:2px;
+    font-size: medium;
+}
+/* .drop{
+    left: -139px;
+} */
+.inactive{
+    color: white;
+}
+.inactive:hover{
+    color: rgb(238, 183, 81);
+}
+.active:hover{
+    color: rgb(238, 183, 81);
+} 
+.inactivedrop{
+    width: 100%;
+    color: white;
+} 
+ .inactivedrop:hover{
+    color: black;
+}
+
+.act{
+    color: rgb(238, 183, 81);
+}
+.inact{
+    color: white;
+    font-family: inherit;
+}
+.inact:hover{
+    color: black;
+}
+
+.title{
+    color: grey;
 }

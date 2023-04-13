@@ -7,6 +7,7 @@ function TextField(props) {
         <input
           onChange={props.onChange}
           className={classes.textfield}
+          value={props.value}
           type={props.type ? props.type : "text"}
           required
         ></input>

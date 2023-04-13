@@ -18,6 +18,17 @@
 } 
 
 .text{
-    background-color: black;
-    color: white;
+    /* background-color: black; */
+    color: black;
+    text-align: center;
+    vertical-align: center;
+    margin: auto;
+    font-size: larger;
+    
+}
+
+@media screen and (max-width:700px){
+    .text{
+        float: top;
+    }
 }

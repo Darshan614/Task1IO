@@ -24,35 +24,21 @@ function AddForm() {
       )
     );
   };
-  const [category, setcategory] = useState();
-  const [categoryvalid, setcategoryvalid] = useState();
-  const categoryChangeHandler = (event) => {
-    setcategory(event.target.value);
-    setcategoryvalid(
-      validatefield(
-        {
-          required: true,
-          maxlength: 10,
-          minlength: 2,
-        },
-        event.target.value
-      )
-    );
-  };
-  const [imageurl, setimageurl] = useState();
-  const [imageurlvalid, setimageurlvalid] = useState();
-  const imageurlChangeHandler = (event) => {
-    setimageurl(event.target.value);
-    setimageurlvalid(
-      validatefield(
-        {
-          required: true,
-          url: true,
-        },
-        event.target.value
-      )
-    );
-  };
+  const [category, setcategory] = useState("Category");
+  // const [categoryvalid, setcategoryvalid] = useState();
+  // const categoryChangeHandler = (event) => {
+  //   setcategory(event.target.value);
+  //   setcategoryvalid(
+  //     validatefield(
+  //       {
+  //         required: true,
+  //         maxlength: 10,
+  //         minlength: 2,
+  //       },
+  //       event.target.value
+  //     )
+  //   );
+  // };
   const [price, setprice] = useState(0);
   const [pricevalid, setpricevalid] = useState();
   const priceChangeHandler = (event) => {
@@ -100,10 +86,21 @@ function AddForm() {
   };
   const [error, setError] = useState();
   const onAddForm = () => {
+    console.log("in add form");
+    console.log(
+      productnamevalid,
+      descriptionvalid,
+      imageUrlsValid,
+      availablevalid,
+      pricevalid
+    );
+    setError(imageUrlsValid);
+    const imageValid = imageUrlsValid.filter((e) => e !== "valid");
+    console.log(113, imageValid.length > 0);
     if (
       productnamevalid !== "valid" ||
       descriptionvalid !== "valid" ||
-      imageurlvalid !== "valid" ||
+      imageValid.length > 0 ||
       availablevalid !== "valid" ||
       pricevalid !== "valid"
     ) {
@@ -111,8 +108,9 @@ function AddForm() {
       return;
     }
     const token = localStorage.getItem("token");
-    console.log(productname, price, imageurl, description, available);
-    fetch("http://localhost:8080/addproduct", {
+    const url2 = "http://localhost:8080/addproduct";
+    const url1 = "https://ecommerceio.onrender.com/addproduct";
+    fetch(url2, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -120,7 +118,7 @@ function AddForm() {
       },
       body: JSON.stringify({
         productname: productname,
-        imageURL: imageurl,
+        imageURLs: imageUrls,
         price: price,
         availablequantity: available,
         description: description,
@@ -131,7 +129,6 @@ function AddForm() {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         if (data.message === "Product added") {
           navigate("/products");
         } else {
@@ -139,10 +136,42 @@ function AddForm() {
         }
       })
       .catch((err) => {
-        console.log(err);
         setError("Request Failed");
       });
   };
+
+  const [imageUrls, setImageUrls] = useState([""]);
+  const [imageUrlsValid, setImageUrlsValid] = useState([]);
+  const addImageUrl = () => {
+    setImageUrls([...imageUrls, ""]);
+    setImageUrlsValid([...imageUrlsValid, null]); // add null for newly added field
+  };
+  const imageurlChangeHandler = (e, index) => {
+    const newImageUrls = [...imageUrls];
+    const newImageUrlsValid = [...imageUrlsValid];
+    newImageUrls[index] = e.target.value;
+    newImageUrlsValid[index] = validatefield(
+      {
+        required: true,
+        url: true,
+      },
+      e.target.value
+    );
+    setImageUrls(newImageUrls);
+    setImageUrlsValid(newImageUrlsValid);
+  };
+
+  const removeImageUrl = (index) => {
+    console.log(imageUrls);
+    const newImageUrls = [...imageUrls];
+    const newImageUrlsValid = [...imageUrlsValid];
+    newImageUrls.splice(index, 1);
+    newImageUrlsValid.splice(index, 1);
+    console.log("niu", newImageUrls, "niuv", newImageUrlsValid);
+    setImageUrls(newImageUrls);
+    setImageUrlsValid(newImageUrlsValid);
+  };
+
   return (
     <>
       <section className={classes.box}>
@@ -155,13 +184,35 @@ function AddForm() {
           onChange={productnameChangeHandler}
           valid={productnamevalid}
         />
-        <TextField
-          label="Image URL"
-          req={true}
-          icon="image-outline"
-          onChange={imageurlChangeHandler}
-          valid={imageurlvalid}
-        />
+
+        {imageUrls.map((imageUrl, index) => (
+          <div key={index}>
+            <TextField
+              label={`Image URL #${index + 1}`}
+              req={true}
+              icon="image-outline"
+              value={imageUrls[index]}
+              onChange={(e) => imageurlChangeHandler(e, index)}
+              valid={imageUrlsValid[index]}
+            />
+            <div className={classes.rem}>
+              <button
+                className={classes.remove}
+                type="button"
+                onClick={() => removeImageUrl(index)}
+              >
+                {index + 1 > 1 && (
+                  <ion-icon name="remove-circle-outline"></ion-icon>
+                )}
+              </button>
+            </div>
+          </div>
+        ))}
+        <div className={classes.addbutton}>
+          <button className={classes.add} type="button" onClick={addImageUrl}>
+            Add more images
+          </button>
+        </div>
         <TextField
           label="Price"
           req={true}
@@ -169,13 +220,56 @@ function AddForm() {
           onChange={priceChangeHandler}
           valid={pricevalid}
         />
-        <TextField
+        {/* <TextField
           label="Category"
           req={true}
           icon="apps-outline"
           onChange={categoryChangeHandler}
           valid={categoryvalid}
-        />
+        /> */}
+        <div className={`btn-group dropright ${classes.cat}`}>
+          <button
+            type="button"
+            class="btn btn-secondary dropdown-toggle"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          >
+            {category}
+          </button>
+          <div class="dropdown-menu">
+            <div
+              className={`dropdown-item ${classes.category}`}
+              onClick={() => setcategory("Laptop")}
+            >
+              Laptop
+            </div>
+            <div
+              className={`dropdown-item ${classes.category}`}
+              onClick={() => setcategory("Mobile")}
+            >
+              Mobile
+            </div>
+            <div
+              className={`dropdown-item ${classes.category}`}
+              onClick={() => setcategory("TV")}
+            >
+              TV
+            </div>
+            <div
+              className={`dropdown-item ${classes.category}`}
+              onClick={() => setcategory("Fridge")}
+            >
+              Fridge
+            </div>
+            <div
+              class="dropdown-item"
+              onClick={() => setcategory("Headphones")}
+            >
+              Headphones
+            </div>
+          </div>
+        </div>
         <TextField
           label="Available Quantity"
           req={true}

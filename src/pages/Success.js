@@ -7,7 +7,7 @@ function Success() {
   const token = localStorage.getItem("token");
   const dispatch = useDispatch();
   useEffect(() => {
-    fetch("http://localhost:8080/placeOrder", {
+    fetch("https://ecommerceio.onrender.com/placeOrder", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -21,7 +21,7 @@ function Success() {
         return res.json();
       })
       .then((data) => {
-        console.log("data", data);
+        // console.log("data", data);
         dispatch(cartActions.removeCart());
       })
       .catch((err) => {

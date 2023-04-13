@@ -5,6 +5,11 @@ import Review from "./UI/Review";
 function ReviewList(props) {
   return (
     <div>
+      {props.reviewList.length === 0 && (
+        <p style={{ color: "black", textAlign: "center" }}>
+          No reviews for this product
+        </p>
+      )}
       {props.reviewList.map((r) => {
         return <Review reviewData={r} />;
       })}

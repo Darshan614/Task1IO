@@ -11,15 +11,12 @@ function Card(props) {
     e.stopPropagation();
     const key = props.id;
     dispatch(cartActions.addToCart({ [key]: 1 }));
-    // let cart = localStorage.getItem("cart");
-    // if (!cart == "") cart += " ";
-    // cart += props.id;
-    // localStorage.setItem("cart", cart);
-    // console.log(localStorage.getItem("cart").split(" "));
   };
   const productClickHandler = () => {
+    document.documentElement.scrollTop = 0;
     const page = "/product/" + props.id;
     navigate(page);
+    // window.location.reload(true);
   };
   let arr = [];
   for (var i = 1; i <= Math.round(props.rating); i++) {

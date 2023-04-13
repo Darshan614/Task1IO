@@ -6,3 +6,50 @@
     box-shadow: 20px 20px grey;
     margin-top: 30px;
 }
+
+.remove{
+    color: red;
+    outline: none;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+.remove:focus{
+    outline: none;
+}
+.rem{
+    margin-top: -32px;
+    float: right;
+    margin-bottom: 25px;
+}
+.add{
+    color: green;
+    outline: none;
+    border: 1px solid green;
+    background: none;
+    cursor: pointer;
+    margin: auto;
+}
+.add:focus{
+    outline: none;
+}
+
+.addbutton{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin-top: -25px; */
+    top: -20px;
+    position: relative;
+}
+
+.category:hover{
+    background-color: gray;
+    color: white;
+    cursor: pointer;
+}
+
+.cat{
+    margin-top: -10px;
+    margin-bottom: 10px;
+}

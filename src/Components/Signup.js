@@ -109,7 +109,7 @@ function Signup(props) {
       return;
     }
     console.log(email, password, username, confirmpassword);
-    fetch("http://localhost:8080/signup", {
+    fetch("https://ecommerceio.onrender.com/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -118,6 +118,7 @@ function Signup(props) {
         email: email,
         password: password,
         username: username,
+        address: address,
       }),
     })
       .then((res) => {
