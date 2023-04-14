@@ -78,7 +78,7 @@ function AddForm() {
         {
           minLength: 5,
           required: true,
-          maxLength: 20,
+          maxLength: 50,
         },
         event.target.value
       )
@@ -110,7 +110,7 @@ function AddForm() {
     const token = localStorage.getItem("token");
     const url2 = "http://localhost:8080/addproduct";
     const url1 = "https://ecommerceio.onrender.com/addproduct";
-    fetch(url2, {
+    fetch(url1, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -130,7 +130,7 @@ function AddForm() {
       })
       .then((data) => {
         if (data.message === "Product added") {
-          navigate("/products");
+          navigate("/products?category=all");
         } else {
           setError(data.message);
         }
@@ -220,13 +220,6 @@ function AddForm() {
           onChange={priceChangeHandler}
           valid={pricevalid}
         />
-        {/* <TextField
-          label="Category"
-          req={true}
-          icon="apps-outline"
-          onChange={categoryChangeHandler}
-          valid={categoryvalid}
-        /> */}
         <div className={`btn-group dropright ${classes.cat}`}>
           <button
             type="button"

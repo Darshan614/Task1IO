@@ -7,9 +7,8 @@ import { useNavigate } from "react-router-dom";
 import Modal from "../Components/UI/Modal";
 import Loading from "./Loading";
 
-function UserProfile() {
+function UserProfile(props) {
   const dispatch = useDispatch();
-  const [loading, setloading] = useState(true);
   const [showModal, setshowModal] = useState(false);
   const navigate = useNavigate();
   const [userprofile, setuserprofile] = useState({});
@@ -25,7 +24,6 @@ function UserProfile() {
       .then((data) => {
         console.log(data);
         setuserprofile(data.user);
-        setloading(false);
       });
   }, []);
 
@@ -34,8 +32,7 @@ function UserProfile() {
   };
   return (
     <>
-      {loading && <Loading />}
-      {!loading && (
+      {
         <div className={classes.data}>
           <div className={classes.box}>
             <div className={classes.imageicon}>
@@ -44,24 +41,24 @@ function UserProfile() {
             <div className={`row ${classes.field}`}>
               <div className={`col-md-5 col-12 ${classes.key}`}>Email</div>
               <div className={`col-md-5 col-12 ${classes.key}`}>
-                {userprofile.email}
+                {props.userprofile.email}
               </div>
             </div>
             <div className={`row ${classes.field}`}>
               <div className={`col-md-5 col-12 ${classes.key}`}>Username</div>
               <div className={`col-md-5 col-12 ${classes.key}`}>
-                {userprofile.username}
+                {props.userprofile.username}
               </div>
             </div>
             <div className={`row ${classes.field}`}>
               <div className={`col-md-5 col-12 ${classes.key}`}>Address</div>
               <div className={`col-md-5 col-12 ${classes.key}`}>
-                {userprofile.address}
+                {props.userprofile.address}
               </div>
             </div>
           </div>
         </div>
-      )}
+      }
     </>
   );
 }

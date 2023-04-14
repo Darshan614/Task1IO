@@ -20,8 +20,8 @@ function Cart() {
   const loggedIn = useSelector((state) => state.auth.loggedIn);
   const cart = useSelector((state) => state.cart.cart);
   const [productList, setproductList] = useState([]);
-
   useEffect(() => {
+    setloading(true);
     let cartdata = [];
     cart.cartList.forEach((c) => {
       cartdata.push({ id: Object.keys(c)[0] });
@@ -44,6 +44,43 @@ function Cart() {
         setloading(false);
         setproductList(data.productData);
       });
+  }, []);
+  useEffect(() => {
+    // setloading(true);
+    let cartdata = [];
+    cart.cartList.forEach((c) => {
+      cartdata.push({ id: Object.keys(c)[0] });
+    });
+    const newlist = productList;
+    console.log("newlist", newlist, cartdata);
+    var filtered = newlist.filter((ele) => {
+      for (let x = 0; x < cartdata.length; x++) {
+        console.log(ele._id, cartdata[x].id);
+        if (cartdata[x].id === ele._id) {
+          return true;
+        }
+      }
+      return false;
+    });
+    console.log("newlist", newlist, cartdata, filtered);
+    setproductList(filtered);
+    // fetch("https://ecommerceio.onrender.com/cartData", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     cart: cartdata,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     console.log("data in cart", data);
+    //     setloading(false);
+    //     setproductList(data.productData);
+    //   });
   }, [cart]);
   const prevLocation = useLocation();
   const onBuyHandler = (event) => {

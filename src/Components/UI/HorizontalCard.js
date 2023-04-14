@@ -19,13 +19,13 @@ function HorizontalCard(props) {
   //   }
   // }
   const quantity = useSelector((state) => state.cart.cart.cartList);
-  const [q, setq] = useState(2);
+  const [q, setq] = useState(0);
 
   useEffect(() => {
     console.log("quantity", quantity, props.prod._id);
     for (let x = 0; x < quantity.length; x++) {
       console.log("inloop", quantity[x]);
-      if (Object.keys(quantity[x])[0] == props.prod._id) {
+      if (Object.keys(quantity[x])[0] === props.prod._id) {
         // console.log(x, "found", quantity[x][Object.keys(quantity[x])[0]]);
         setq(quantity[x][Object.keys(quantity[x])[0]]);
       }

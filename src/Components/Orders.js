@@ -19,32 +19,44 @@ function Orders() {
       })
       .then((data) => {
         console.log(data);
-        setorderData(data.orders);
         setloading(false);
+        setorderData(data.orders);
       });
   }, []);
 
-  return orderData.map((order) => {
-    const dateString = order.created_at;
-    const date = new Date(dateString);
-    const year = date.getFullYear(); // 2023
-    const month = date.getMonth() + 1; // JavaScript months are zero-indexed, so add 1
-    const day = date.getDate(); // 24
-    const hours = date.getHours(); // 12
-    const minutes = date.getMinutes(); // 55
-    const seconds = date.getSeconds(); // 43
-    const milliseconds = date.getMilliseconds(); // 418
-    const d = day + "/" + month + "/" + year;
-    const t = hours + ":" + minutes + ":" + seconds;
-    return (
-      <>
-        {loading && <Loading />}
-        {!loading && (
-          <Order amount={order.total} d={d} t={t} products={order.products} />
-        )}
-      </>
-    );
-  });
+  return (
+    <>
+      {loading && <Loading />}
+      {!loading && orderData.length === 0 && (
+        <p style={{ color: "black", textAlign: "center" }}>No orders yet</p>
+      )}
+      {orderData.map((order) => {
+        const dateString = order.created_at;
+        const date = new Date(dateString);
+        const year = date.getFullYear(); // 2023
+        const month = date.getMonth() + 1; // JavaScript months are zero-indexed, so add 1
+        const day = date.getDate(); // 24
+        const hours = date.getHours(); // 12
+        const minutes = date.getMinutes(); // 55
+        const seconds = date.getSeconds(); // 43
+        const milliseconds = date.getMilliseconds(); // 418
+        const d = day + "/" + month + "/" + year;
+        const t = hours + ":" + minutes + ":" + seconds;
+        return (
+          <>
+            {!loading && (
+              <Order
+                amount={order.total}
+                d={d}
+                t={t}
+                products={order.products}
+              />
+            )}
+          </>
+        );
+      })}
+    </>
+  );
 }
 
 export default Orders;

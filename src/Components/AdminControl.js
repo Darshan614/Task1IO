@@ -8,9 +8,6 @@ function AdminControl() {
         <Link className={classes.link} to="/admin/addProduct">
           Add Product
         </Link>
-        <Link className={classes.link} to="/admin/editProduct">
-          Edit Product
-        </Link>
         <Link className={classes.link} to="/admin/deleteUser">
           Delete a user
         </Link>

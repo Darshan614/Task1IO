@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Components/UI/Modal";
 import Update from "../Components/Update";
+import Loading from "../Components/Loading";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -13,6 +14,7 @@ function Profile() {
   const navigate = useNavigate();
   const [userprofile, setuserprofile] = useState({});
   const [showform, setshowform] = useState(false);
+  const [loading, setloading] = useState(true);
 
   const ondeactivate = () => {
     setshowModal(false);
@@ -36,6 +38,7 @@ function Profile() {
     setshowModal(true);
   };
   useEffect(() => {
+    setloading(true);
     const token = localStorage.getItem("token");
     fetch("https://ecommerceio.onrender.com/profile", {
       method: "GET",
@@ -47,25 +50,29 @@ function Profile() {
       .then((data) => {
         console.log(data);
         setuserprofile(data.user);
+        setloading(false);
       });
-  }, []);
+  }, [showform]);
   return (
-    <div style={{ width: "70%", margin: "auto" }}>
-      {!showform && <UserProfile />}
-      {showform && <Update userprofile={userprofile} />}
-      <Button
-        title={showform ? "Show profile" : "Update"}
-        onClick={() => setshowform(!showform)}
-      />
-      <Button title="Deactivate" onClick={confirmation} />
-      {showModal && (
-        <Modal
-          title="Confirm!"
-          message="Are you sure you want to deactivate account?"
-          onClick={ondeactivate}
+    <>
+      {loading && <Loading />}
+      <div style={{ width: "70%", margin: "auto" }}>
+        {!showform && <UserProfile userprofile={userprofile} />}
+        {showform && <Update userprofile={userprofile} />}
+        <Button
+          title={showform ? "Show profile" : "Update"}
+          onClick={() => setshowform(!showform)}
         />
-      )}
-    </div>
+        <Button title="Deactivate" onClick={confirmation} />
+        {showModal && (
+          <Modal
+            title="Confirm!"
+            message="Are you sure you want to deactivate account?"
+            onClick={ondeactivate}
+          />
+        )}
+      </div>
+    </>
   );
 }
 

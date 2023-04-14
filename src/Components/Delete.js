@@ -6,9 +6,13 @@ import Button from "./UI/Button";
 import validatefield from "../validator/validator";
 import { useNavigate } from "react-router-dom";
 import Error from "./UI/Error";
+import Loading from "./Loading";
+import Modal from "../Components/UI/Modal";
 
 function Delete() {
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
+  const [showModal, setshowModal] = useState(false);
   const [email, setemail] = useState();
   const [emailvalid, setemailvalid] = useState();
   const emailChangeHandler = (event) => {
@@ -43,6 +47,7 @@ function Delete() {
       return;
     }
     const token = localStorage.getItem("token");
+    setloading(true);
     fetch("https://ecommerceio.onrender.com/deleteUser", {
       method: "POST",
       headers: {
@@ -60,7 +65,8 @@ function Delete() {
       .then((data) => {
         console.log(data);
         if (data.message == "User deleted") {
-          navigate("/admin");
+          setloading(false);
+          setshowModal(true);
         }
       })
       .catch((err) => {
@@ -68,8 +74,13 @@ function Delete() {
         setError("Request Failed");
       });
   };
+  const onClose = () => {
+    setshowModal(false);
+    navigate("/admin");
+  };
   return (
     <>
+      {loading && <Loading />}
       <section className={classes.box}>
         {error && <Error title={error} />}
         <Title title="Delete User" />
@@ -89,6 +100,9 @@ function Delete() {
         />
         <Button title="Delete User" onClick={onDelete} />
       </section>
+      {showModal && (
+        <Modal title="Success!" message="User deleted" onClick={onClose} />
+      )}
     </>
   );
 }

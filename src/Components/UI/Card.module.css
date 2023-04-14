@@ -67,3 +67,44 @@
     box-shadow: 0px 4px 24px -1px rgba(0, 0, 0, 0.7);
     /* box-shadow: 4px 4px black */
 }
+
+.inc{
+    background-color: white;
+    color: black;
+    border: none;
+    width: 25px;
+    font-weight: 900;
+}
+
+.quantity{
+    padding-left: 6px;
+    padding-right: 6px;
+    background-color: rgb(250, 228, 200);
+}
+
+.inc:hover{
+    cursor: pointer;
+    background-color: rgb(235, 186, 95);
+}
+.inc:focus{
+    outline: none;
+}
+
+.quant{
+    float: right;
+}
+
+.edit{
+    position: absolute;
+    left: 90%;
+    outline: none;
+    border: none;
+    background: #ffc1079e;
+    backdrop-filter: blur(8px);
+    border-radius: 20px;
+    cursor: pointer;
+    color: black
+}
+.edit:hover{
+    background: #ff8b079e;
+}

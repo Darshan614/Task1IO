@@ -1,6 +1,7 @@
 import classes from "./TextField.module.css";
 
 function TextField(props) {
+  console.log(4, props.value, props.type, props.label);
   return (
     <div className={classes.fieldbox}>
       <div className={classes.field}>

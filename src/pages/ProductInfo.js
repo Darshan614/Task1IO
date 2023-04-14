@@ -29,6 +29,7 @@ function ProductInfo() {
   const [similar, setsimilar] = useState([]);
   const [loading, setloading] = useState(true);
   useEffect(() => {
+    setloading(true);
     fetch("https://ecommerceio.onrender.com/productInfo", {
       method: "POST",
       headers: {

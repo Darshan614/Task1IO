@@ -12,7 +12,7 @@ function Update(props) {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [showModal, setshowModal] = useState(false);
-  const [username, setusername] = useState("");
+  const [username, setusername] = useState(props.userprofile.username);
   const [usernameValid, setusernameValid] = useState("");
   const onUserNameChangeHandler = (event) => {
     setusername(event.target.value);
@@ -24,7 +24,7 @@ function Update(props) {
     );
   };
   const [addressValid, setaddressValid] = useState("");
-  const [address, setaddress] = useState("");
+  const [address, setaddress] = useState(props.userprofile.address);
   const onAddressChangeHandler = (event) => {
     setaddress(event.target.value);
     setaddressValid(
@@ -74,6 +74,7 @@ function Update(props) {
           req={true}
           valid={usernameValid}
           icon="person-outline"
+          value={username}
         />
         <TextField
           label="Address"
@@ -81,6 +82,7 @@ function Update(props) {
           req={true}
           valid={addressValid}
           icon="lock-closed-outline"
+          value={address}
         />
         <Button title="Update" onClick={onUpdate} />
       </section>

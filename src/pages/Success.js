@@ -31,7 +31,6 @@ function Success() {
   return (
     <p style={{ color: "black" }}>
       Thanks for shopping! Your order will be delivered soon
-      <a href="mailto:orders@example.com">orders@example.com</a>.
     </p>
   );
 }
