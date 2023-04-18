@@ -17,7 +17,6 @@ import { useDispatch } from "react-redux";
 import MyOrders from "./pages/MyOrders";
 import Profile from "./pages/Profile";
 import ResetPassword from "./pages/ResetPassword";
-import Update from "./Components/Update";
 import Contact from "./pages/Contact";
 
 const router = createBrowserRouter([

@@ -1,7 +1,7 @@
-import AddForm from "../Components/AddForm";
-import Delete from "../Components/Delete";
+import AddForm from "../Components/Admin/AddForm";
+import Delete from "../Components/Admin/Delete";
 import { useParams } from "react-router-dom";
-import EditForm from "../Components/EditForm";
+import EditForm from "../Components/Admin/EditForm";
 
 function Modify() {
   const params = useParams();

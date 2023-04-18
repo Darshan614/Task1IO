@@ -50,8 +50,12 @@ let validatefield = (constraints, value) => {
       return "Invalid URL";
     }
   } else if (constraints.password) {
-    if (!/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/.test(value)) {
-      return "Password must have a capital letter, small letter, numerical value ,special character and must be 6 to 16 characters long.";
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/.test(
+        value
+      )
+    ) {
+      return "Password must have a capital letter, small letter, numerical value ,special character and must be 8 to 16 characters long.";
     }
   }
   if (constraints.matchWith) {

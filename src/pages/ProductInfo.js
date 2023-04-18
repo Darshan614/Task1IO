@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ProductData from "../Components/UI/ProductData";
-import SimilarProducts from "../Components/SimilarProducts";
-import Reviews from "../Components/Reviews";
-import AddReview from "../Components/AddReview";
-import Loading from "../Components/Loading";
+import SimilarProducts from "../Components/Product/SimilarProducts";
+import Reviews from "../Components/Product/Reviews";
+import AddReview from "../Components/Product/AddReview";
+import Loading from "../Components/UI/Loading";
 
 function ProductInfo() {
   const errorHandler = () => {

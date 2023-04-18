@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import Loading from "../Components/Loading";
+import Loading from "../Components/UI/Loading";
 import Card from "../Components/UI/Card";
-import { useDispatch, useSelector } from "react-redux";
 
 function Products() {
   const [filter, setfilter] = useSearchParams();
@@ -58,16 +57,6 @@ function Products() {
 
   useEffect(() => {
     setloading(true);
-    // const url = "https://ecommerceio.onrender.com/productCount/" + category;
-    // fetch(url)
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setCount(data.count);
-    //     setlast(Math.ceil(data.count / 12));
-    //   })
-    //   .catch((err) => {
-    //     console.log(err);
-    //   });
 
     const URL = `https://ecommerceio.onrender.com/products?page=${page}&category=${category}`;
     console.log(URL);

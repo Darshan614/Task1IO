@@ -1,12 +1,12 @@
-import UserProfile from "../Components/UserProfile";
+import UserProfile from "../Components/User/UserProfile";
 import { useEffect, useState } from "react";
 import Button from "../Components/UI/Button";
 import { authActions } from "../store/index";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Modal from "../Components/UI/Modal";
-import Update from "../Components/Update";
-import Loading from "../Components/Loading";
+import Update from "../Components/User/Update";
+import Loading from "../Components/UI/Loading";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -40,25 +40,36 @@ function Profile() {
   useEffect(() => {
     setloading(true);
     const token = localStorage.getItem("token");
-    fetch("https://ecommerceio.onrender.com/profile", {
-      method: "GET",
-      headers: {
-        Authorization: "Bearer " + token,
-      },
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        setuserprofile(data.user);
-        setloading(false);
-      });
-  }, [showform]);
+    if (showform === false) {
+      fetch("https://ecommerceio.onrender.com/profile", {
+        method: "GET",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+          setuserprofile(data.user);
+          setloading(false);
+        });
+    } else {
+      setloading(false);
+    }
+  }, []);
   return (
     <>
       {loading && <Loading />}
       <div style={{ width: "70%", margin: "auto" }}>
         {!showform && <UserProfile userprofile={userprofile} />}
-        {showform && <Update userprofile={userprofile} />}
+        {showform && (
+          <Update
+            setloading={setloading}
+            setuserprofile={setuserprofile}
+            setshowform={setshowform}
+            userprofile={userprofile}
+          />
+        )}
         <Button
           title={showform ? "Show profile" : "Update"}
           onClick={() => setshowform(!showform)}

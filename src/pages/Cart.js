@@ -1,12 +1,8 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import classes from "./Cart.module.css";
-import HorizontalCard from "../Components/UI/HorizontalCard";
-import Button from "../Components/UI/Button";
 import { cartActions } from "../store/index";
 import { useLocation, useNavigate } from "react-router-dom";
-import Modal from "../Components/UI/Modal";
-import Loading from "../Components/Loading";
+import CartComponent from "../Components/Cart/CartComponent";
 
 function Cart() {
   const [showModal, setshowModal] = useState(false);
@@ -64,23 +60,6 @@ function Cart() {
     });
     console.log("newlist", newlist, cartdata, filtered);
     setproductList(filtered);
-    // fetch("https://ecommerceio.onrender.com/cartData", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     cart: cartdata,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     console.log("data in cart", data);
-    //     setloading(false);
-    //     setproductList(data.productData);
-    //   });
   }, [cart]);
   const prevLocation = useLocation();
   const onBuyHandler = (event) => {
@@ -112,36 +91,14 @@ function Cart() {
   };
   return (
     <>
-      {loading && <Loading />}
-      {!loading && productList.length === 0 && (
-        <p className={classes.empty}>
-          Cart is empty
-          <p className={classes.icon}>
-            <ion-icon name="sad-outline"></ion-icon>
-          </p>
-        </p>
-      )}
-      {!loading && (
-        <div className="container">
-          {productList.map((c) => {
-            return <HorizontalCard prod={c} />;
-          })}
-
-          {productList.length !== 0 && (
-            <Button title="Buy Now" onClick={onBuyHandler} />
-          )}
-          {productList.length !== 0 && (
-            <Button title="Delete Cart" onClick={confirmation} />
-          )}
-          {showModal && (
-            <Modal
-              title="Confirm!"
-              message="Delete Cart?"
-              onClick={deleteCart}
-            />
-          )}
-        </div>
-      )}
+      <CartComponent
+        loading={loading}
+        productList={productList}
+        onBuyHandler={onBuyHandler}
+        confirmation={confirmation}
+        deleteCart={deleteCart}
+        showModal={showModal}
+      />
     </>
   );
 }

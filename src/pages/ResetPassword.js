@@ -1,4 +1,4 @@
-import ForgetForm from "../Components/ForgetForm";
+import ForgetForm from "../Components/Authenticate/ForgetForm";
 
 function ResetPassword() {
   return (

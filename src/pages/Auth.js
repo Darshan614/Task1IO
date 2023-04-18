@@ -1,4 +1,4 @@
-import Authenticate from "../Components/Authenticate";
+import Authenticate from "../Components/Authenticate/Authenticate";
 
 function Auth() {
   return <Authenticate />;
