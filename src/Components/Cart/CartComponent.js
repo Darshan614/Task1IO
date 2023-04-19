@@ -3,8 +3,12 @@ import Modal from "../../Components/UI/Modal";
 import Loading from "../../Components/UI/Loading";
 import HorizontalCard from "../../Components/UI/HorizontalCard";
 import Button from "../../Components/UI/Button";
-
+import { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { cartActions } from "../../store/index";
 function Cart(props) {
+  // const [total, setTotal] = useState(10000);
+
   return (
     <>
       {props.loading && <Loading />}
@@ -21,7 +25,12 @@ function Cart(props) {
           {props.productList.map((c) => {
             return <HorizontalCard prod={c} />;
           })}
-
+          {props.productList.length !== 0 && (
+            <p className={classes.total}>
+              <div>Total:</div>
+              <div>&#8377; {props.total}</div>
+            </p>
+          )}
           {props.productList.length !== 0 && (
             <Button title="Buy Now" onClick={props.onBuyHandler} />
           )}

@@ -41,6 +41,7 @@ function Cart() {
         setproductList(data.productData);
       });
   }, []);
+  const [total, setTotal] = useState(0);
   useEffect(() => {
     // setloading(true);
     let cartdata = [];
@@ -48,7 +49,7 @@ function Cart() {
       cartdata.push({ id: Object.keys(c)[0] });
     });
     const newlist = productList;
-    console.log("newlist", newlist, cartdata);
+    console.log("newlist1", newlist, cartdata);
     var filtered = newlist.filter((ele) => {
       for (let x = 0; x < cartdata.length; x++) {
         console.log(ele._id, cartdata[x].id);
@@ -58,9 +59,15 @@ function Cart() {
       }
       return false;
     });
-    console.log("newlist", newlist, cartdata, filtered);
+    let t = 0;
+    for (let a = 0; a < filtered.length; a++) {
+      t = t + filtered[a].price * Object.values(cart.cartList[a])[0];
+    }
+    console.log(t);
+    setTotal(t);
+    console.log("newlist2", newlist, cartdata, filtered, cart.cartList);
     setproductList(filtered);
-  }, [cart]);
+  }, [cart, loading]);
   const prevLocation = useLocation();
   const onBuyHandler = (event) => {
     event.preventDefault();
@@ -98,6 +105,7 @@ function Cart() {
         confirmation={confirmation}
         deleteCart={deleteCart}
         showModal={showModal}
+        total={total}
       />
     </>
   );

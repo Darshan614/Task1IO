@@ -13,6 +13,7 @@ function Navbar() {
     localStorage.removeItem("token");
     localStorage.removeItem("role");
     dispatch(authActions.logout());
+    console.log(localStorage.getItem("token"), localStorage.getItem("role"));
     navigate("/");
   };
 

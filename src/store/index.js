@@ -20,7 +20,8 @@ const authSlice = createSlice({
     },
     logout(state, action) {
       state.loggedIn = false;
-      state.role = action.payload;
+      // state.role = action.payload;
+      state.role = null;
     },
   },
 });

@@ -32,6 +32,10 @@ function HorizontalCard(props) {
     }
     // setq(quantity[1][props.prod._id]);
   }, [quantity]);
+  // useEffect(() => {
+  //   const contribution = props.prod.price * q;
+  //   props.setTotal(props.total + contribution);
+  // }, [q]);
 
   const onAdd = () => {
     const key = props.prod._id;
@@ -60,7 +64,7 @@ function HorizontalCard(props) {
               <h5 class="card-title">{props.prod.productname}</h5>
               <p class="card-text">{props.prod.description}</p>
               <p class="card-text">
-                <small class="text-muted">${props.prod.price}</small>
+                <small class="text-muted">&#8377; {props.prod.price}</small>
               </p>
               <button className={classes.inc} onClick={onAdd}>
                 +

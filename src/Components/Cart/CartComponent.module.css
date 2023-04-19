@@ -19,3 +19,12 @@
     font-size: 90px;
     color: brown;
 }
+.total{
+    display: flex;
+    color: black;
+    width: 50%;
+    margin: auto;
+    justify-content: space-around;
+    border: 1px solid grey;
+    border-radius: 5px;
+}

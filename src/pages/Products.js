@@ -44,6 +44,7 @@ function Products() {
 
   useEffect(() => {
     const url = "https://ecommerceio.onrender.com/productCount/" + category;
+    const url2 = "http://localhost:8080/productCount/" + category;
     fetch(url)
       .then((res) => res.json())
       .then((data) => {
